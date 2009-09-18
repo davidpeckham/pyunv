@@ -2,15 +2,6 @@ from distutils.core import setup
 
 # python setup.py register sdist upload
 
-# patch distutils if it can't cope with the "classifiers" or "download_url"
-# keywords (prior to python 2.3.0).
-from distutils.dist import DistributionMetadata
-if not hasattr(DistributionMetadata, 'classifiers'):
-    DistributionMetadata.classifiers = None
-if not hasattr(DistributionMetadata, 'download_url'):
-    DistributionMetadata.download_url = None
-
-readme_text = open("README", "U").read()
 
 SUMMARY = """
 PyUnv reads SAP BusinessObjects universe (.unv) files. PyUnv can extract 
@@ -32,7 +23,8 @@ Operating System :: OS Independent
 Programming Language :: Python
 Topic :: Software Development :: Libraries :: Python Modules
 """
-    
+
+
 setup(
     name = 'pyunv',
     version = '0.1.8',
