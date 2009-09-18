@@ -68,26 +68,3 @@ I'm testing PyUnv with universes created on BusinessObjects XI R2. I haven't
 tested it with earlier or later versions. I am still reverse-engineering other 
 metadata in the universe file. If you have questions, or would like to help, 
 just drop me a line.
-
-Change Log
-==========
-
-New in version 0.1.7
---------------------
- - Fixes a bug with reading a source table that has certain metadata. This
-   is a temporary workaround until I can decode this metadata.
- - Now reads source columns from the universe file.
-
-New in version 0.1.6
---------------------
- - Added the Manifest class to generate a text manifest for a BusinessObjects 
-   universe. Manifest uses the Mako template engine.
- - Reader.read_short_string now strips carriage returns and line feeds from
-   universe strings. It returns a unicode string instead of a string tuple.
-
-New in version 0.1.5
---------------------
- - First PyPi release
- - Reads basic universe parameters, classes, objects, conditions, tables, and
-   virtual tables.
- - Tested with several BusinessObjects XI R2 universes and Python 2.6.
