@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/pyunv/universe.py</string>
+	<string>setup.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -24,29 +24,35 @@
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>COPYING</string>
+			<string>CHANGES</string>
+			<key>lastUsed</key>
+			<date>2009-09-18T15:53:45Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>README</string>
-			<key>lastUsed</key>
-			<date>2009-09-17T06:50:13Z</date>
+			<string>COPYING</string>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>MANIFEST.in</string>
 			<key>lastUsed</key>
-			<date>2009-09-17T06:50:09Z</date>
+			<date>2009-09-18T15:56:41Z</date>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>README</string>
+			<key>lastUsed</key>
+			<date>2009-09-18T15:54:05Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>setup.py</string>
 			<key>lastUsed</key>
-			<date>2009-09-18T15:50:30Z</date>
+			<date>2009-09-18T15:58:01Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 		<dict>
-			<key>expanded</key>
-			<true/>
 			<key>name</key>
 			<string>lib</string>
 			<key>regexFolderFilter</key>
@@ -59,28 +65,28 @@
 	<integer>238</integer>
 	<key>metaData</key>
 	<dict>
-		<key>lib/pyunv/universe.py</key>
+		<key>setup.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>30</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>45</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>18</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>lib/pyunv/universe.py</string>
+		<string>setup.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{194, 93}, {690, 629}}</string>
+	<string>{{196, 107}, {690, 629}}</string>
 </dict>
 </plist>

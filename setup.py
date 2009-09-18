@@ -1,4 +1,5 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
+#from distutils.core import setup
 
 # python setup.py register sdist upload
 
@@ -38,10 +39,11 @@ setup(
     keywords = ['encoding', 'BusinessObjects', 'SAP', 'universe', 'unv'],
     license = 'LGPL',
     long_description = SUMMARY.strip(),
-    packages = ['pyunv'],
+    package_dir = {'':'lib'},
+    packages = find_packages('lib', exclude=[]),
     platforms = ['Many'],
     provides = ['pyunv'],
-    test_suite = ['pyunv.tests'],
+    test_suite = 'pyunv.tests',
     url = 'http://code.google.com/p/pyunv/',
     zip_safe = False,
     )
