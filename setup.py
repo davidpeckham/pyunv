@@ -1,5 +1,4 @@
-from setuptools import setup, find_packages
-#from distutils.core import setup
+from setuptools import setup
 
 # python setup.py register sdist upload
 
@@ -39,8 +38,7 @@ setup(
     keywords = ['encoding', 'BusinessObjects', 'SAP', 'universe', 'unv'],
     license = 'LGPL',
     long_description = SUMMARY.strip(),
-    package_dir = {'':'lib'},
-    packages = find_packages('lib', exclude=[]),
+    packages = ['pyunv'],
     platforms = ['Many'],
     provides = ['pyunv'],
     test_suite = 'pyunv.tests',

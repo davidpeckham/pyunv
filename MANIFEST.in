@@ -1,4 +1,4 @@
 include MANIFEST
 include COPYING
 recursive-include docs *.html *.css *.png *.gif
-recursive-include lib/pyunv/templates *.mako
+recursive-include pyunv/templates *.mako
