@@ -22,11 +22,12 @@ from pyunv.universe import Universe, Parameters, Class, Object, Condition, Table
 class ReaderTests(unittest.TestCase):
     def setUp(self):
         self.filename = 'tests/Universe_A8.unv'
-            
-    # def testexport(self):
-    #     universe = Reader(open(self.filename, 'rb')).universe
-    #     CsvWriter(universe, open(os.path.splitext(self.filename)[0]+'.csv', 'wb'))
 
+    def testDate(self):
+        r = Reader(open(self.filename, 'rb'))
+        r.date_from_dateindex(2442964)
+        datetime.date(1976,7,4)
+            
     def testmanifest(self):
         universe = Reader(open(self.filename, 'rb')).universe
         f = open(self.filename+'.manifest.txt', 'w')

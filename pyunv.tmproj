@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>lib/pyunv/test/reader.py</string>
+	<string>pyunv/tests/reader.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -24,115 +24,96 @@
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>CHANGES</string>
-			<key>lastUsed</key>
-			<date>2009-09-18T15:53:45Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
-			<string>COPYING</string>
-		</dict>
-		<dict>
-			<key>filename</key>
 			<string>MANIFEST.in</string>
 			<key>lastUsed</key>
 			<date>2009-09-18T15:56:41Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>README</string>
-			<key>lastUsed</key>
-			<date>2009-09-18T15:54:05Z</date>
+			<string>CHANGES.txt</string>
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>setup.py</string>
-			<key>lastUsed</key>
-			<date>2009-09-19T08:22:04Z</date>
+			<string>COPYING.txt</string>
 		</dict>
 		<dict>
 			<key>expanded</key>
 			<true/>
 			<key>name</key>
-			<string>lib</string>
+			<string>pyunv</string>
 			<key>regexFolderFilter</key>
 			<string>!.*/(\.[^/]*|CVS|_darcs|_MTN|\{arch\}|blib|.*~\.nib|.*\.(framework|app|pbproj|pbxproj|xcode(proj)?|bundle))$</string>
 			<key>sourceDirectory</key>
-			<string>lib</string>
+			<string>pyunv</string>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>README.txt</string>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>setup.py</string>
+			<key>lastUsed</key>
+			<date>2009-09-20T12:52:10Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>238</integer>
 	<key>metaData</key>
 	<dict>
-		<key>lib/pyunv/reader.py</key>
+		<key>pyunv/reader.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>3</integer>
+				<integer>38</integer>
 				<key>line</key>
-				<integer>7</integer>
+				<integer>333</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>311</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>15</integer>
 				<key>line</key>
-				<integer>0</integer>
+				<integer>333</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>38</integer>
 				<key>line</key>
-				<integer>359</integer>
+				<integer>333</integer>
 			</dict>
 		</dict>
-		<key>lib/pyunv/test/reader.py</key>
+		<key>pyunv/tests/reader.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>10</integer>
 				<key>line</key>
-				<integer>40</integer>
+				<integer>11</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>9</integer>
-		</dict>
-		<key>setup.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>30</integer>
-				<key>line</key>
-				<integer>45</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>18</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>setup.py</string>
-		<string>lib/pyunv/reader.py</string>
-		<string>lib/pyunv/test/reader.py</string>
+		<string>pyunv/tests/reader.py</string>
+		<string>pyunv/reader.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{291, 33}, {690, 629}}</string>
+	<string>{{180, 40}, {805, 738}}</string>
 </dict>
 </plist>
