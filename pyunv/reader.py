@@ -97,8 +97,8 @@ class Reader(object):
         params.created_by = self.read_shortstring()
         params.modified_by = self.read_shortstring()
         created, modified, = struct.unpack('<2I', self.file.read(8))
-        params.created_date = self.date_from_dateindex(created)
-        params.modified_date = self.date_from_dateindex(modified)
+        params.created_date = Reader.date_from_dateindex(created)
+        params.modified_date = Reader.date_from_dateindex(modified)
         seconds, = struct.unpack('<I', self.file.read(4))
         params.query_time_limit = seconds / 60
         params.row_limit, = struct.unpack('<I', self.file.read(4))
@@ -328,9 +328,10 @@ class Reader(object):
         else:
             return None
 
-    def date_from_dateindex(self, dateindex):
+    @classmethod
+    def date_from_dateindex(cls, dateindex):
         """return the date corresponding to the BusinessObjects universe date index"""
-        #print(dateindex)
+        assert dateindex >= 2442964, 'dateindex must be <= 2442964'
         return datetime.date(1976,7,4) + datetime.timedelta(dateindex-2442964)
 
 

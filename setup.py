@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # python setup.py register sdist upload
 
@@ -34,14 +34,23 @@ setup(
     classifiers = filter(None, CLASSIFIERS.split("\n")),
     description = 'Python parser for SAP BusinessObjects universe (*.unv) files',
     download_url = 'http://code.google.com/p/pyunv/downloads/list',
+    include_package_data = True,
     install_requires = ['Mako'],
     keywords = ['encoding', 'BusinessObjects', 'SAP', 'universe', 'unv'],
     license = 'LGPL',
     long_description = SUMMARY.strip(),
-    packages = ['pyunv'],
+    packages = find_packages(exclude=['pyunv.tests']),
     platforms = ['Many'],
     provides = ['pyunv'],
     test_suite = 'pyunv.tests',
     url = 'http://code.google.com/p/pyunv/',
     zip_safe = False,
+    
+    # package_data = {
+    #     # If any package contains *.txt or *.rst files, include them:
+    #     '': ['*.txt', '*.rst', '*.mako'],
+    #     # And include any *.unv files found in the 'tests' package:
+    #     'tests': ['*.unv'],
+    # },
+    
     )

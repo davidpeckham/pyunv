@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>currentDocument</key>
-	<string>pyunv/tests/reader.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -24,12 +22,6 @@
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>MANIFEST.in</string>
-			<key>lastUsed</key>
-			<date>2009-09-18T15:56:41Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
 			<string>CHANGES.txt</string>
 		</dict>
 		<dict>
@@ -37,8 +29,6 @@
 			<string>COPYING.txt</string>
 		</dict>
 		<dict>
-			<key>expanded</key>
-			<true/>
 			<key>name</key>
 			<string>pyunv</string>
 			<key>regexFolderFilter</key>
@@ -54,66 +44,16 @@
 			<key>filename</key>
 			<string>setup.py</string>
 			<key>lastUsed</key>
-			<date>2009-09-20T12:52:10Z</date>
+			<date>2009-09-20T15:03:22Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>238</integer>
 	<key>metaData</key>
-	<dict>
-		<key>pyunv/reader.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>38</integer>
-				<key>line</key>
-				<integer>333</integer>
-			</dict>
-			<key>columnSelection</key>
-			<false/>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>311</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>15</integer>
-				<key>line</key>
-				<integer>333</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>38</integer>
-				<key>line</key>
-				<integer>333</integer>
-			</dict>
-		</dict>
-		<key>pyunv/tests/reader.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>10</integer>
-				<key>line</key>
-				<integer>11</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>2</integer>
-		</dict>
-	</dict>
-	<key>openDocuments</key>
-	<array>
-		<string>pyunv/tests/reader.py</string>
-		<string>pyunv/reader.py</string>
-	</array>
+	<dict/>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{180, 40}, {805, 738}}</string>
+	<string>{{70, 40}, {805, 738}}</string>
 </dict>
 </plist>
