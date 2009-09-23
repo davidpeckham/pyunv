@@ -1,4 +1,12 @@
-0.1.8
+0.1.9  September 23, 2009
+- Added sample universes for unit tests
+- Fixed a bug that caused manifests to show a condition's parent id instead of name.
+- The manifest template now creates a manifest that resembles the PDF file 
+created by Designer.
+- setup.py now uses Setuptools instead of distutils
+- This works now -- "python setup.py test"
+
+0.1.8  September 18, 2009
 - Restructured project folder to prepare for unit tests.
 - Moved Subversion repository to Google Code.
 - Borrowed setup.py settings from Python project.

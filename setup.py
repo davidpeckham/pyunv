@@ -27,7 +27,7 @@ Topic :: Software Development :: Libraries :: Python Modules
 
 setup(
     name = 'pyunv',
-    version = '0.1.8',
+    version = '0.1.9',
     
     author='David Peckham',
     author_email = 'dave.peckham@me.com',
