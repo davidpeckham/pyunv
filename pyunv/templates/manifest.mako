@@ -9,25 +9,71 @@
         Comments: ${parms.comments}
         Created by: ${parms.created_by} on ${parms.created_date}
         Modified by: ${parms.modified_by} on ${parms.modified_date}
-
-    Parameters
-
-        Query time limit: ${parms.query_time_limit} minutes
-        Query row limit: ${parms.row_limit} rows
-        Object strategy: ${parms.object_strategy}
-        Cost estimate warning limit: ${parms.cost_estimate_warning_limit} minutes
-        Long text limit: ${parms.long_text_limit} characters
+        
         Domain: ${parms.domain}
         Database engine: ${parms.dbms_engine}
         Network layer: ${parms.network_layer}
 
-    Source Tables
+    Strategies
+
+        Object strategy: ${parms.object_strategy}
+
+    Controls
+
+        Query time limit: ${parms.query_time_limit} minutes
+        Query row limit: ${parms.row_limit} rows
+        Cost estimate warning limit: ${parms.cost_estimate_warning_limit} minutes
+        Long text limit: ${parms.long_text_limit} characters
+
+    SQL Parameters
+
+        (pyunv does not support SQL parameters yet)
+
+    Links
+    
+        (pyunv does not support links yet)
+
+    Objects
+    % for uclass in universe.classes:
+        ${write_class_objects(uclass, 1)}
+    % endfor
+    <%def name="write_class_objects(uclass, level)">
+        ${uclass.name}
+        % for obj in uclass.objects:
+            ${obj.name}  description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
+        % endfor
+        <% level = level+1 %> \
+		% for subclass in uclass.subclasses:
+		    ${write_class_objects(subclass, level)}
+		% endfor
+    </%def>
+    
+    Conditions
+    % for uclass in universe.classes:
+        ${write_class_conditions(uclass, 1)}
+    % endfor
+    <%def name="write_class_conditions(uclass, level)">
+        ${uclass.name}
+        % for condition in uclass.conditions:
+            ${condition.name}  description: ${condition.description}, where: ${condition.where_sql}
+        % endfor
+        <% level = level+1 %> \
+		% for subclass in uclass.subclasses:
+		    ${write_class_conditions(subclass, level)}
+		% endfor
+    </%def>
+    
+    Hierarchies
+    
+        (pyunv does not support hierarchies yet)
+
+    Tables
 
     % for table in universe.tables:
-        ${table.name} (id ${table.id_})
+        ${table.schema}.${table.name}  id ${table.id_}
     % endfor
 
-    Source Columns
+    Columns
     
     % for column in universe.columns:
         ${column.table_name}.${column.name} (id ${column.id_})
@@ -38,37 +84,7 @@
     % for join in universe.joins:
         ${join.name} (id ${join.id_})
     % endfor
-	<%doc>
-    Class Index
-    % for uclass in universe.classes:
-        ${write_class_summary(uclass, 1)}
-    % endfor
-
-    <%def name="write_class_summary(uclass, level)">
-        ${uclass.name}
-        <% level = level+1 %>
-        % if level < 6:
-            % for subclass in uclass.subclasses:
-                ${write_class_summary(subclass, level)}
-            % endfor
-        % endif
-    </%def>
-	</%doc>
-
-    Classes
-    % for uclass in universe.classes:
-        ${write_class(uclass, 1)}
-    % endfor
-    <%def name="write_class(uclass, level)">
-        ${uclass.name}
-        % for obj in uclass.objects:
-            ${obj.name}  description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
-        % endfor
-        % for condition in uclass.conditions:
-            ${condition.name}  description: ${condition.description}, where: ${condition.where_sql}
-        % endfor
-        <% level = level+1 %> \
-		% for subclass in uclass.subclasses:
-		    ${write_class(subclass, level)}
-		% endfor
-    </%def>
+    
+    Contexts
+    
+        (pyunv does not support contexts yet)

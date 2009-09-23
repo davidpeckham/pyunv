@@ -20,6 +20,7 @@ class Universe(object):
         self.id_ = id_
         self.name = name
         self.description = description
+        self.schema = None
         self.tables = []
         self.columns = []
         self.classes = []
@@ -128,14 +129,15 @@ class Condition(ObjectBase):
 class Table(object):
 
     """docstring for Table"""
-    def __init__(self, id_=None, name=None):
+    def __init__(self, id_, name, schema):
         super(Table, self).__init__()
         self.id_ = id_
         self.name = name
+        self.schema = schema
 
     def __str__(self):
-        return '%s id=%d, name=%s' % (type(self), 
-            self.id_, self.name) 
+        return '%s id=%d, schema=%s name=%s' % (type(self), 
+            self.id_, self.schema, self.name) 
         
 
 class VirtualTable(object):

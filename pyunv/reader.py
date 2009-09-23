@@ -122,20 +122,20 @@ class Reader(object):
 
         B unknown (usually 0x1)
         B unknown (usually 0x1 or 0x2)
+        S database_username?
         S schema_name
-        S database_username
         I max_table_id
         I table_count
         ???B tables
 
         """
         self.file.seek(self.content_offsets['Tables;'])
-        struct.unpack('<2B', self.file.read(2))
-        schema_name = self.read_shortstring()
+        self.file.read(2)
         user_name = self.read_shortstring()
+        schema = self.read_shortstring()
         max_table_id, = struct.unpack('<I', self.file.read(4))
         table_count, = struct.unpack('<I', self.file.read(4))
-        return [self.read_table() for x in range(table_count)]
+        return [self.read_table(schema) for x in range(table_count)]
 
     def read_virtual_tables(self):
         """read the virtual table definitions from the universe file
@@ -167,7 +167,19 @@ class Reader(object):
     #     pass
 
     def read_joins(self):
-        """docstring for read_joins"""
+        """docstring for read_joins
+        
+        I join_count
+        8I unknown
+        S join_condition
+        3I unknown
+        ----
+        S table_name
+        I table_index
+        ...
+
+        I unknown
+        """
         return []
 
     def read_classes(self):
@@ -177,7 +189,7 @@ class Reader(object):
             struct.unpack('<4I', self.file.read(16))
         return [self.read_class() for x in range(rootclass_count)]
         
-    def read_table(self):
+    def read_table(self, schema):
         """read a table definition from the universe file
 
         I table_id
@@ -200,7 +212,7 @@ class Reader(object):
           self.file.read(4*count+3)
         else:
           self.file.read(1)
-        return Table(id_, name)
+        return Table(id_, name, schema)
 
     def read_virtualtable(self):
         """read a virtual table definition from the universe file
@@ -333,28 +345,3 @@ class Reader(object):
         """return the date corresponding to the BusinessObjects universe date index"""
         assert dateindex >= 2442964, 'dateindex must be <= 2442964'
         return datetime.date(1976,7,4) + datetime.timedelta(dateindex-2442964)
-
-
-import csv
-import unittest
-from manifest import Manifest
-
-class ReaderTests(unittest.TestCase):
-    def setUp(self):
-        self.filename = 'tests/Universe_A8.unv'
-            
-    # def testexport(self):
-    #     universe = Reader(open(self.filename, 'rb')).universe
-    #     CsvWriter(universe, open(os.path.splitext(self.filename)[0]+'.csv', 'wb'))
-
-    def testmanifest(self):
-        universe = Reader(open(self.filename, 'rb')).universe
-        f = open(self.filename+'.manifest.txt', 'w')
-        manifest = Manifest()
-        manifest.save(f, universe)
-        f.close()
-        
-
-if __name__ == '__main__':
-    unittest.main()
-
