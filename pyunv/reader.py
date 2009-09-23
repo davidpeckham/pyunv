@@ -39,7 +39,7 @@ class Reader(object):
         #self.universe.column_attributes = self.read_column_attributes()
         self.universe.joins = self.read_joins()
         self.universe.classes = self.read_classes()
-
+        
     def find_content_offsets(self):
         """find the offsets of the object, table, and column definitions 
         in the BusinessObjects universe file"""
@@ -323,7 +323,7 @@ class Reader(object):
         name = self.read_shortstring()
         parent, = struct.unpack('<I', self.file.read(4))
         description = self.read_shortstring()
-        c = Condition(self.universe, id_, name, parent, description)
+        c = Condition(self.universe, id_, parent, name, description)
         where_tablecount, = struct.unpack('<H', self.file.read(2))
         struct.unpack('<%dI' % where_tablecount, self.file.read(4 * where_tablecount))
         unknown_tablecount, = struct.unpack('<H', self.file.read(2))

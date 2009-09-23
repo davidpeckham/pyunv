@@ -40,7 +40,7 @@
     <%def name="write_class_objects(uclass, level)">
         ${uclass.name}
         % for obj in uclass.objects:
-            ${obj.name}  description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
+            ${obj.name} (${obj.id_})  description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
         % endfor
         <% level = level+1 %> \
 		% for subclass in uclass.subclasses:
@@ -55,7 +55,7 @@
     <%def name="write_class_conditions(uclass, level)">
         ${uclass.name}
         % for condition in uclass.conditions:
-            ${condition.name}  description: ${condition.description}, where: ${condition.where_sql}
+            ${condition.name} (${condition.id_})  description: ${condition.description}, where: ${condition.where_sql}
         % endfor
         <% level = level+1 %> \
 		% for subclass in uclass.subclasses:
