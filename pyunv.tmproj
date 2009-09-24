@@ -25,6 +25,8 @@
 		<dict>
 			<key>filename</key>
 			<string>CHANGES.txt</string>
+			<key>lastUsed</key>
+			<date>2009-09-23T16:18:55Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -43,12 +45,14 @@
 		<dict>
 			<key>filename</key>
 			<string>README.txt</string>
+			<key>lastUsed</key>
+			<date>2009-09-23T16:17:07Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>setup.py</string>
 			<key>lastUsed</key>
-			<date>2009-09-20T15:03:22Z</date>
+			<date>2009-09-23T16:18:52Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -67,31 +71,16 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>16</integer>
-		</dict>
-		<key>pyunv/universe.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>38</integer>
-				<key>line</key>
-				<integer>124</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>21</integer>
+			<integer>162</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>pyunv/reader.py</string>
-		<string>pyunv/universe.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{1347, -89}, {805, 738}}</string>
+	<string>{{172, 212}, {805, 738}}</string>
 </dict>
 </plist>
