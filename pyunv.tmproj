@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>pyunv/tests/universe_xir2.unv.manifest.txt</string>
+	<string>pyunv/reader.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -73,48 +73,6 @@
 			<key>firstVisibleLine</key>
 			<integer>324</integer>
 		</dict>
-		<key>pyunv/templates/manifest.mako</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>26</integer>
-				<key>line</key>
-				<integer>84</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>53</integer>
-		</dict>
-		<key>pyunv/tests/test_reader_sample.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>32</integer>
-				<key>line</key>
-				<integer>26</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>2</integer>
-		</dict>
-		<key>pyunv/tests/universe_xir2.unv.manifest.txt</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>36</integer>
-				<key>line</key>
-				<integer>149</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>136</integer>
-		</dict>
 		<key>pyunv/universe.py</key>
 		<dict>
 			<key>caret</key>
@@ -133,10 +91,6 @@
 	<key>openDocuments</key>
 	<array>
 		<string>pyunv/reader.py</string>
-		<string>pyunv/tests/test_reader_sample.py</string>
-		<string>pyunv/templates/manifest.mako</string>
-		<string>pyunv/tests/universe_xir2.unv.manifest.txt</string>
-		<string>pyunv/universe.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
