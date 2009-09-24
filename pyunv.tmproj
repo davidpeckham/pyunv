@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>currentDocument</key>
-	<string>pyunv/reader.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -81,6 +79,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{172, 212}, {805, 738}}</string>
+	<string>{{172, 178}, {805, 738}}</string>
 </dict>
 </plist>
