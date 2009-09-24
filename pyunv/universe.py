@@ -10,6 +10,7 @@ Copyright (c) 2009 David Peckham. All rights reserved.
 import os
 import re
 import sys
+from repr import repr
 
 
 class Universe(object):
@@ -78,11 +79,12 @@ class Join(object):
     
     @property
     def statement(self):
-        if self.term_count > 2:
-            format = self.expression.replace(chr(1), '%s')
-            s = format % (t[0] for t in self.terms)
-        else:
+        #TODO: add table or object names to the statement
+        if self.term_count == 2:
             s = self.terms[0][0] + self.expression + self.terms[1][0]
+        else:
+            format = self.expression.replace(chr(1), '%s')
+            s = format % tuple([t[0] for t in self.terms])
         return s
 
 
