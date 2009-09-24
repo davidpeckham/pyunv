@@ -15,14 +15,14 @@ import struct
 import sys
 
 sys.path.insert(0, '..')
-from pyunv.universe import Universe, Parameters, Class, Object, Condition, Table, VirtualTable, Column
+from pyunv.universe import Universe, Parameters, Class, Join, Object, Condition, Table, VirtualTable, Column
 
 # import pyunv
 
 class Reader(object):
     
     _content_markers = ('Objects;', 'Tables;', 'Columns;', 
-        'Virtual Tables;', 'Parameters;', 'Columns Id;')
+        'Virtual Tables;', 'Parameters;', 'Columns Id;', 'Joins;')
     
     def __init__(self, f):
         super(Reader, self).__init__()
@@ -169,18 +169,18 @@ class Reader(object):
     def read_joins(self):
         """docstring for read_joins
         
+        2I unknown
         I join_count
-        8I unknown
-        S join_condition
-        3I unknown
-        ----
-        S table_name
-        I table_index
-        ...
-
+        [...joins...]
         I unknown
+
         """
-        return []
+        self.file.seek(self.content_offsets['Joins;'])
+        self.file.read(8)
+        join_count, = struct.unpack('<I', self.file.read(4))
+        joins = [self.read_join() for x in range(join_count)]
+        self.file.read(8)
+        return joins
 
     def read_classes(self):
         """docstring for read_classes"""
@@ -330,6 +330,30 @@ class Reader(object):
         struct.unpack('<%dI' % unknown_tablecount, self.file.read(4 * unknown_tablecount))
         c.where = self.read_shortstring()
         return c
+
+    def read_join(self):
+        """read a BusinessObjects join definition from the universe file
+
+        6I unknown
+        S join_conditions
+        2I unknown
+        I term_count
+        [repeats term_count times]
+            S term
+            I term_table_id
+
+        """
+        self.file.read(24)
+        j = Join(self.universe)
+        j.expression = self.read_shortstring()
+        self.file.read(8)
+        j.term_count, = struct.unpack('<I', self.file.read(4))
+        j.terms = []
+        for i in range(j.term_count):
+            term_name = self.read_shortstring()
+            term_parent_id, = struct.unpack('<I', self.file.read(4)) 
+            j.terms.append((term_name, term_parent_id))
+        return j
 
     def read_shortstring(self):
         """read a short variable-length string from the universe file"""

@@ -17,14 +17,14 @@ from pyunv.reader import Reader
 from pyunv.manifest import Manifest
 
 
-class ReaderSampleTests(unittest.TestCase):
+class ReaderUniverseXiR2(unittest.TestCase):
     def setUp(self):
-        super(ReaderSampleTests, self).setUp()
-        self.filename = 'pyunv/tests/Sample_A.unv'
+        super(ReaderUniverseXiR2, self).setUp()
+        self.filename = 'pyunv/tests/universe_xir2.unv'
         self.reader = Reader(open(self.filename, 'rb'))
     
     def tearDown(self):
-        super(ReaderSampleTests, self).tearDown()
+        super(ReaderUniverseXiR2, self).tearDown()
         del self.reader
             
     def test_manifest(self):

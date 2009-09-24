@@ -66,7 +66,19 @@ class Class(object):
         self.subclasses = []
 
 
+class Join(object):
+    
+    """docstring for Join"""
+    def __init__(self, universe):
+        super(Join, self).__init__()
+        self.universe = universe
+        self.expression = None
+        self.term_count = 0
+        self.terms = []
+
+
 class ObjectBase(object):
+    
     """docstring for ObjectBase"""
     def __init__(self, universe, id_, parent, name, description):
         super(ObjectBase, self).__init__()
