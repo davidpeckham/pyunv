@@ -75,7 +75,13 @@ class Join(object):
         self.expression = None
         self.term_count = 0
         self.terms = []
-
+    
+    @property
+    def statement(self):
+        format = self.expression.replace(chr(1), '%s')
+        # s = format % (t[0] for t in self.terms)
+        # return s
+        return format
 
 class ObjectBase(object):
     

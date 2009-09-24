@@ -82,7 +82,7 @@
     Joins
 
     % for join in universe.joins:
-        ${join.expression}
+        ${join.statement}
     % endfor
     
     Contexts
