@@ -78,10 +78,13 @@ class Join(object):
     
     @property
     def statement(self):
-        format = self.expression.replace(chr(1), '%s')
-        # s = format % (t[0] for t in self.terms)
-        # return s
-        return format
+        if self.term_count > 2:
+            format = self.expression.replace(chr(1), '%s')
+            s = format % (t[0] for t in self.terms)
+        else:
+            s = self.terms[0][0] + self.expression + self.terms[1][0]
+        return s
+
 
 class ObjectBase(object):
     

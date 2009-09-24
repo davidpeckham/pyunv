@@ -45,6 +45,40 @@ class ReaderTests(unittest.TestCase):
         manifest = Manifest()
         manifest.save(f, universe)
         f.close()
+
+
+class SampleUniverseXIR2(unittest.TestCase):
+    def setUp(self):
+        super(SampleUniverseXIR2, self).setUp()
+        self.filename = 'pyunv/tests/universe_xir2.unv'
+        self.reader = Reader(open(self.filename, 'rb'))
+    
+    def tearDown(self):
+        super(SampleUniverseXIR2, self).tearDown()
+        del self.reader
+            
+    def test_manifest(self):
+        universe = self.reader.universe
+        f = open(self.filename+'.manifest.txt', 'w')
+        Manifest().save(f, universe)
+        f.close()
+        
+
+class SampleUniverseComplexJoin(unittest.TestCase):
+    def setUp(self):
+        super(SampleUniverseComplexJoin, self).setUp()
+        self.filename = 'pyunv/tests/universes/complexjoins.unv'
+        self.reader = Reader(open(self.filename, 'rb'))
+    
+    def tearDown(self):
+        super(SampleUniverseComplexJoin, self).tearDown()
+        del self.reader
+            
+    def test_manifest(self):
+        universe = self.reader.universe
+        f = open(self.filename+'.txt', 'w')
+        Manifest().save(f, universe)
+        f.close()
         
 
 if __name__ == '__main__':
