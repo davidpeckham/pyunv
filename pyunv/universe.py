@@ -26,6 +26,7 @@ class Universe(object):
         self.columns = []
         self.classes = []
         self.joins = []
+        self.contexts = []
         self.parameters = None
 
     def table_name(self, table_id):
@@ -77,9 +78,10 @@ class Class(object):
 class Join(object):
     
     """docstring for Join"""
-    def __init__(self, universe):
+    def __init__(self, universe, id_):
         super(Join, self).__init__()
         self.universe = universe
+        self.id_ = id_
         self.expression = None
         self.term_count = 0
         self.terms = []
@@ -100,6 +102,22 @@ class Join(object):
         return '%s.%s' % (self.universe.table_name(table_id), column_name)
 
 
+class Context(object):
+    
+    """docstring for Join"""
+    def __init__(self, universe, id_, name, description):
+        super(Context, self).__init__()
+        self.universe = universe
+        self.id_ = id_
+        self.name = name
+        self.description = description
+        self.joins = []
+
+    @property
+    def join_list(self):
+        return ', '.join([str(join_id) for join_id in self.joins])
+        
+        
 class ObjectBase(object):
     
     """docstring for ObjectBase"""

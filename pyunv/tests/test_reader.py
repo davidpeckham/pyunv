@@ -41,7 +41,7 @@ class ReaderTests(unittest.TestCase):
         
     def test_manifest(self):
         universe = self.reader.universe
-        f = open(self.filename+'.manifest.txt', 'w')
+        f = open(self.filename+'.txt', 'w')
         manifest = Manifest()
         manifest.save(f, universe)
         f.close()
@@ -59,7 +59,7 @@ class SampleUniverseXIR2(unittest.TestCase):
             
     def test_manifest(self):
         universe = self.reader.universe
-        f = open(self.filename+'.manifest.txt', 'w')
+        f = open(self.filename+'.txt', 'w')
         Manifest().save(f, universe)
         f.close()
         

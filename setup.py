@@ -38,6 +38,7 @@ setup(
     install_requires = ['Mako'],
     keywords = ['encoding', 'BusinessObjects', 'SAP', 'universe', 'unv'],
     license = 'LGPL',
+    # long_description = SUMMARY.strip() + '\n\n' + file('CHANGES.txt').read(),
     long_description = SUMMARY.strip(),
     #packages = find_packages(exclude=['pyunv.tests']),
     packages = find_packages(),

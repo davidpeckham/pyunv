@@ -15,13 +15,14 @@ import struct
 import sys
 
 sys.path.insert(0, '..')
-from pyunv.universe import Universe, Parameters, Class, Join, Object, Condition, Table, VirtualTable, Column
+from pyunv.universe import Universe, Parameters, Class, Join, Object
+from pyunv.universe import Condition, Table, VirtualTable, Column, Context
 
 # import pyunv
 
 class Reader(object):
     
-    _content_markers = ('Objects;', 'Tables;', 'Columns;', 
+    _content_markers = ('Objects;', 'Tables;', 'Columns;', 'Contexts;',
         'Virtual Tables;', 'Parameters;', 'Columns Id;', 'Joins;')
     
     def __init__(self, f):
@@ -39,6 +40,7 @@ class Reader(object):
         self.universe.columns.sort()
         #self.universe.column_attributes = self.read_column_attributes()
         self.universe.joins = self.read_joins()
+        self.universe.contexts = self.read_contexts()
         self.universe.classes = self.read_classes()
         
     def find_content_offsets(self):
@@ -90,31 +92,31 @@ class Reader(object):
         
         params = Parameters()
         struct.unpack('<2I', self.file.read(8))
-        params.universe_filename = self.read_shortstring()
-        params.universe_name = self.read_shortstring()
+        params.universe_filename = self.read_string()
+        params.universe_name = self.read_string()
         params.revision, = struct.unpack('<I', self.file.read(4))
         struct.unpack('<H', self.file.read(2))
-        params.description = self.read_shortstring()
-        params.created_by = self.read_shortstring()
-        params.modified_by = self.read_shortstring()
+        params.description = self.read_string()
+        params.created_by = self.read_string()
+        params.modified_by = self.read_string()
         created, modified, = struct.unpack('<2I', self.file.read(8))
         params.created_date = Reader.date_from_dateindex(created)
         params.modified_date = Reader.date_from_dateindex(modified)
         seconds, = struct.unpack('<I', self.file.read(4))
         params.query_time_limit = seconds / 60
         params.row_limit, = struct.unpack('<I', self.file.read(4))
-        self.read_shortstring()
-        params.object_strategy = self.read_shortstring()
+        self.read_string()
+        params.object_strategy = self.read_string()
         struct.unpack('<x', self.file.read(1))
         seconds, = struct.unpack('<I', self.file.read(4))
         params.cost_estimate_warning_limit = seconds / 60
         params.long_text_limit, = struct.unpack('<I', self.file.read(4))
         struct.unpack('<4x', self.file.read(4))
-        params.comments = self.read_shortstring()
+        params.comments = self.read_string()
         struct.unpack('<3I', self.file.read(12))
-        params.domain = self.read_shortstring()
-        params.dbms_engine = self.read_shortstring()
-        params.network_layer = self.read_shortstring()
+        params.domain = self.read_string()
+        params.dbms_engine = self.read_string()
+        params.network_layer = self.read_string()
         
         return params
 
@@ -132,8 +134,8 @@ class Reader(object):
         """
         self.file.seek(self.content_offsets['Tables;'])
         self.file.read(2)
-        user_name = self.read_shortstring()
-        schema = self.read_shortstring()
+        user_name = self.read_string()
+        schema = self.read_string()
         max_table_id, = struct.unpack('<I', self.file.read(4))
         table_count, = struct.unpack('<I', self.file.read(4))
         return [self.read_table(schema) for x in range(table_count)]
@@ -170,7 +172,8 @@ class Reader(object):
     def read_joins(self):
         """docstring for read_joins
         
-        2I unknown
+        I table_count?
+        I unknown
         I join_count
         [...joins...]
         I unknown
@@ -182,6 +185,20 @@ class Reader(object):
         joins = [self.read_join() for x in range(join_count)]
         self.file.read(8)
         return joins
+
+    def read_contexts(self):
+        """docstring for read_contexts
+        
+        I context_count
+        I max_context_id
+        contexts...
+
+        """
+        self.file.seek(self.content_offsets['Contexts;'])
+        count, = struct.unpack('<I', self.file.read(4))
+        max_id, = struct.unpack('<I', self.file.read(4))
+        contexts = [self.read_context() for x in range(count)]
+        return contexts
 
     def read_classes(self):
         """docstring for read_classes"""
@@ -205,7 +222,7 @@ class Reader(object):
         """
         id_, = struct.unpack('<I', self.file.read(4))
         self.file.read(19)
-        name = self.read_shortstring()
+        name = self.read_string()
         self.file.read(13)
         flag, = struct.unpack('<?', self.file.read(1))
         if flag:
@@ -223,7 +240,7 @@ class Reader(object):
         
         """
         table_id, = struct.unpack('<I', self.file.read(4))
-        select = self.read_shortstring()
+        select = self.read_string()
         return VirtualTable(table_id, select)
 
     def read_column(self):
@@ -236,7 +253,7 @@ class Reader(object):
         """
         id_, = struct.unpack('<I', self.file.read(4))
         parent, = struct.unpack('<I', self.file.read(4))
-        name = self.read_shortstring()
+        name = self.read_string()
         #print(name)
         return Column(id_, name, parent, self.universe)
 
@@ -257,9 +274,9 @@ class Reader(object):
 
         """
         id_, = struct.unpack('<I', self.file.read(4))
-        name = self.read_shortstring()
+        name = self.read_string()
         parent, = struct.unpack('<I', self.file.read(4))
-        description = self.read_shortstring()
+        description = self.read_string()
         c = Class(self.universe, id_, parent, name, description)
         self.file.seek(7, os.SEEK_CUR)
         object_count, = struct.unpack('<I', self.file.read(4))
@@ -290,19 +307,19 @@ class Reader(object):
 
        """
         id_, = struct.unpack('<I', self.file.read(4))
-        name = self.read_shortstring()
+        name = self.read_string()
         parent, = struct.unpack('<I', self.file.read(4))
-        description = self.read_shortstring()
+        description = self.read_string()
         o = Object(self.universe, id_, parent, name, description)
         select_tablecount, = struct.unpack('<H', self.file.read(2))
         struct.unpack('<%dI' % select_tablecount, self.file.read(4 * select_tablecount))
         where_tablecount, = struct.unpack('<H', self.file.read(2))
         struct.unpack('<%dI' % where_tablecount, self.file.read(4 * where_tablecount))
-        o.select = self.read_shortstring()
-        o.where = self.read_shortstring()
-        o.format = self.read_shortstring()
-        unknown2 = self.read_shortstring()
-        o.lov_name = self.read_shortstring()
+        o.select = self.read_string()
+        o.where = self.read_string()
+        o.format = self.read_string()
+        unknown2 = self.read_string()
+        o.lov_name = self.read_string()
         self.file.seek(58, os.SEEK_CUR)
         return o
 
@@ -321,21 +338,22 @@ class Reader(object):
 
         """
         id_, = struct.unpack('<I', self.file.read(4))
-        name = self.read_shortstring()
+        name = self.read_string()
         parent, = struct.unpack('<I', self.file.read(4))
-        description = self.read_shortstring()
+        description = self.read_string()
         c = Condition(self.universe, id_, parent, name, description)
         where_tablecount, = struct.unpack('<H', self.file.read(2))
         struct.unpack('<%dI' % where_tablecount, self.file.read(4 * where_tablecount))
         unknown_tablecount, = struct.unpack('<H', self.file.read(2))
         struct.unpack('<%dI' % unknown_tablecount, self.file.read(4 * unknown_tablecount))
-        c.where = self.read_shortstring()
+        c.where = self.read_string()
         return c
 
     def read_join(self):
         """read a BusinessObjects join definition from the universe file
 
-        6I unknown
+        I join_id
+        5I unknown
         S join_conditions
         2I unknown
         I term_count
@@ -344,20 +362,42 @@ class Reader(object):
             I term_table_id
 
         """
-        self.file.read(24)
-        j = Join(self.universe)
-        j.expression = self.read_shortstring()
+        join_id, = struct.unpack('<I', self.file.read(4))
+        self.file.read(20)
+        j = Join(self.universe, join_id)
+        j.expression = self.read_string()
         self.file.read(8)
         j.term_count, = struct.unpack('<I', self.file.read(4))
         j.terms = []
         for i in range(j.term_count):
-            term_name = self.read_shortstring()
+            term_name = self.read_string()
             term_parent_id, = struct.unpack('<I', self.file.read(4)) 
             j.terms.append((term_name, term_parent_id))
         return j
 
-    def read_shortstring(self):
-        """read a short variable-length string from the universe file"""
+    def read_context(self):
+        """read a BusinessObjects context definition from the universe file
+
+        S name
+        I id
+        S description
+        I join_count
+        [repeats join_count times]
+            join_id
+
+        """
+        name = self.read_string()
+        id_, = struct.unpack('<I', self.file.read(4))
+        description = self.read_string()
+        c = Context(self.universe, id_, name, description)
+        join_count, = struct.unpack('<I', self.file.read(4))
+        for i in range(join_count):
+            join_id, = struct.unpack('<I', self.file.read(4))
+            c.joins.append(join_id)
+        return c
+
+    def read_string(self):
+        """read a variable-length string from the universe file"""
         length, = struct.unpack('<H', self.file.read(2))
         if length:
             s, = struct.unpack('<%ds' % length, self.file.read(length))

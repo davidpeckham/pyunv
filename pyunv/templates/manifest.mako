@@ -82,9 +82,11 @@
     Joins
 
     % for join in universe.joins:
-        ${join.statement}
+        ${join.id_} ${join.statement}
     % endfor
     
     Contexts
     
-        (pyunv does not support contexts yet)
+    % for c in universe.contexts:
+        ${c.name}: ${c.description} ${c.join_list}
+    % endfor
