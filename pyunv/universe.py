@@ -200,11 +200,8 @@ class Column(object):
 
     @property
     def table_name(self):
-        try:
-            tablename = self.universe.table_map[self.parent].name
-        except KeyError:
-            tablename = 'UNKNOWN TABLE (%d)' % self.parent
-        return tablename
+        return self.universe.table_name(self.parent)
+
         
     def __cmp__(self, other):
         return cmp(self.id_, other.id_)

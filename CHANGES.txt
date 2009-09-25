@@ -1,3 +1,8 @@
+0.2.0  September 24, 2009
+- Now parses universe joins
+- Now sorts source database columns by id
+- Added a few unittests and XI R2 test universes (more on the way)
+
 0.1.9  September 23, 2009
 - Added sample universes for unit tests
 - Fixed a bug that caused manifests to show a condition's parent id instead of name.

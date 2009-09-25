@@ -27,7 +27,7 @@ Topic :: Software Development :: Libraries :: Python Modules
 
 setup(
     name = 'pyunv',
-    version = '0.1.9',
+    version = '0.2.0',
     
     author='David Peckham',
     author_email = 'dave.peckham@me.com',
@@ -39,7 +39,8 @@ setup(
     keywords = ['encoding', 'BusinessObjects', 'SAP', 'universe', 'unv'],
     license = 'LGPL',
     long_description = SUMMARY.strip(),
-    packages = find_packages(exclude=['pyunv.tests']),
+    #packages = find_packages(exclude=['pyunv.tests']),
+    packages = find_packages(),
     platforms = ['Many'],
     provides = ['pyunv'],
     test_suite = 'pyunv.tests',
