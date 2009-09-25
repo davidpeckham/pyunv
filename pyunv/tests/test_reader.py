@@ -20,7 +20,7 @@ from pyunv.manifest import Manifest
 class ReaderTests(unittest.TestCase):
     def setUp(self):
         super(ReaderTests, self).setUp()
-        self.filename = 'pyunv/tests/test.unv'
+        self.filename = 'pyunv/tests/universes/test.unv'
         self.reader = Reader(open(self.filename, 'rb'))
     
     def tearDown(self):
@@ -50,7 +50,7 @@ class ReaderTests(unittest.TestCase):
 class SampleUniverseXIR2(unittest.TestCase):
     def setUp(self):
         super(SampleUniverseXIR2, self).setUp()
-        self.filename = 'pyunv/tests/universe_xir2.unv'
+        self.filename = 'pyunv/tests/universes/universe_xir2.unv'
         self.reader = Reader(open(self.filename, 'rb'))
     
     def tearDown(self):
@@ -79,7 +79,7 @@ class SampleUniverseComplexJoin(unittest.TestCase):
         f = open(self.filename+'.txt', 'w')
         Manifest().save(f, universe)
         f.close()
-        
+
 
 if __name__ == '__main__':
     unittest.main()

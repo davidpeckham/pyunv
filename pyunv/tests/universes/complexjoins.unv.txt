@@ -121,35 +121,35 @@
 
     Columns
     
-        public.orderinfo.date_placed (id 17)
-        public.barcode.barcode_ean (id 1)
-        public.orderinfo.date_shipped (id 18)
-        public.barcode.item_id (id 2)
-        public.orderinfo.shipping (id 19)
-        public.customer.customer_id (id 3)
-        public.orderline.orderinfo_id (id 20)
-        public.customer.title (id 4)
-        public.orderline.item_id (id 21)
-        public.customer.fname (id 5)
-        public.orderline.quantity (id 22)
-        public.customer.lname (id 6)
-        public.stock.item_id (id 23)
-        public.customer.addressline (id 7)
-        public.stock.quantity (id 24)
-        public.customer.town (id 8)
-        public.customer.zipcode (id 9)
-        public.customer.phone (id 10)
-        public.item.item_id (id 11)
-        public.item.description (id 12)
-        public.item.cost_price (id 13)
-        public.item.sell_price (id 14)
-        public.orderinfo.orderinfo_id (id 15)
-        public.orderinfo.customer_id (id 16)
+        public.barcode.barcode_ean  id 1
+        public.barcode.item_id  id 2
+        public.customer.customer_id  id 3
+        public.customer.title  id 4
+        public.customer.fname  id 5
+        public.customer.lname  id 6
+        public.customer.addressline  id 7
+        public.customer.town  id 8
+        public.customer.zipcode  id 9
+        public.customer.phone  id 10
+        public.item.item_id  id 11
+        public.item.description  id 12
+        public.item.cost_price  id 13
+        public.item.sell_price  id 14
+        public.orderinfo.orderinfo_id  id 15
+        public.orderinfo.customer_id  id 16
+        public.orderinfo.date_placed  id 17
+        public.orderinfo.date_shipped  id 18
+        public.orderinfo.shipping  id 19
+        public.orderline.orderinfo_id  id 20
+        public.orderline.item_id  id 21
+        public.orderline.quantity  id 22
+        public.stock.item_id  id 23
+        public.stock.quantity  id 24
 
     Joins
 
-        customer_id<customer_id and customer_id<orderinfo_id and customer_id<date_placed and customer_id<date_shipped and customer_id<shipping
-        orderinfo_id=orderinfo_id and item_id=item_id and quantity=quantity
+        public.customer.customer_id<public.orderinfo.customer_id and public.customer.customer_id<public.orderinfo.orderinfo_id and public.customer.customer_id<public.orderinfo.date_placed and public.customer.customer_id<public.orderinfo.date_shipped and public.customer.customer_id<public.orderinfo.shipping
+        public.orderline.orderinfo_id=LineItem.orderinfo_id and public.orderline.item_id=LineItem.item_id and public.orderline.quantity=LineItem.quantity
     
     Contexts
     

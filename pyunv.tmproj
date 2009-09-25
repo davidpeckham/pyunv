@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>pyunv/universe.py</string>
+	<string>pyunv/tests/test_reader.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -56,45 +56,31 @@
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
-	<integer>301</integer>
+	<integer>265</integer>
 	<key>metaData</key>
 	<dict>
-		<key>pyunv/reader.py</key>
+		<key>pyunv/tests/test_reader.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>47</integer>
 				<key>line</key>
-				<integer>355</integer>
+				<integer>22</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>324</integer>
-		</dict>
-		<key>pyunv/universe.py</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>57</integer>
-				<key>line</key>
-				<integer>81</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>68</integer>
+			<integer>15</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>pyunv/universe.py</string>
+		<string>pyunv/tests/test_reader.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{77, 150}, {842, 766}}</string>
+	<string>{{57, 110}, {842, 766}}</string>
 </dict>
 </plist>

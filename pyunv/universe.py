@@ -28,6 +28,13 @@ class Universe(object):
         self.joins = []
         self.parameters = None
 
+    def table_name(self, table_id):
+        try:
+            tablename = self.table_map[table_id].name
+        except KeyError:
+            tablename = 'UNKNOWN TABLE (%d)' % table_id
+        return tablename
+
 
 class Parameters(object):
     """docstring for Parameters"""
@@ -81,11 +88,16 @@ class Join(object):
     def statement(self):
         #TODO: add table or object names to the statement
         if self.term_count == 2:
-            s = self.terms[0][0] + self.expression + self.terms[1][0]
+            s = self.fullterm(self.terms[0]) + self.expression + self.fullterm(self.terms[1])
         else:
             format = self.expression.replace(chr(1), '%s')
-            s = format % tuple([t[0] for t in self.terms])
+            s = format % tuple([self.fullterm(t) for t in self.terms])
         return s
+    
+    def fullterm(self, term):
+        """return the fully qualified term with table and column names"""
+        column_name, table_id = term
+        return '%s.%s' % (self.universe.table_name(table_id), column_name)
 
 
 class ObjectBase(object):
@@ -193,7 +205,10 @@ class Column(object):
         except KeyError:
             tablename = 'UNKNOWN TABLE (%d)' % self.parent
         return tablename
-
+        
+    def __cmp__(self, other):
+        return cmp(self.id_, other.id_)
+        
     def __str__(self):
         return '%s id=%d, name=%s parent=%d' % (type(self), 
             self.id_, self.name, self.parent) 

@@ -76,7 +76,7 @@
     Columns
     
     % for column in universe.columns:
-        ${column.table_name}.${column.name} (id ${column.id_})
+        ${column.table_name}.${column.name}  id ${column.id_}
     % endfor
 
     Joins

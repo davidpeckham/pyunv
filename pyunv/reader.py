@@ -36,6 +36,7 @@ class Reader(object):
             self.universe.table_map[table.id_] = table
         self.universe.virtual_tables = self.read_virtual_tables()
         self.universe.columns = self.read_columns()
+        self.universe.columns.sort()
         #self.universe.column_attributes = self.read_column_attributes()
         self.universe.joins = self.read_joins()
         self.universe.classes = self.read_classes()
