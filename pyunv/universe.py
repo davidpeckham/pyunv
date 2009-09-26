@@ -10,6 +10,7 @@ Copyright (c) 2009 David Peckham. All rights reserved.
 import os
 import re
 import sys
+import collections
 from repr import repr
 
 
@@ -28,18 +29,16 @@ class Universe(object):
         self.joins = []
         self.contexts = []
         self.parameters = None
-        self.table_map = {}
-        self.object_map = {}
+        self.table_map = collections.defaultdict(Table.unknown)
+        self.object_map = collections.defaultdict(Object.unknown)
 
     def build_table_map(self):
         """Construct a table map so we can expand where and select clauses"""
-        self.table_map = dict()
         for t in self.tables:
             self.table_map[t.id_] = t
 
     def build_object_map(self):
         """Construct an object map so we can expand where and select clauses"""
-        self.object_map = dict()
         for c in self.classes:
             self._map_objects(c)
     
@@ -49,13 +48,6 @@ class Universe(object):
         for subclass in c.subclasses:
             self._map_objects(subclass)
         
-    def table_name(self, table_id):
-        try:
-            tablename = self.table_map[table_id].name
-        except KeyError:
-            tablename = 'UNKNOWN TABLE (%d)' % table_id
-        return tablename
-
 
 class Parameters(object):
     """docstring for Parameters"""
@@ -108,7 +100,6 @@ class Join(object):
     
     @property
     def statement(self):
-        #TODO: add table or object names to the statement
         if self.term_count == 2:
             s = self.fullterm(self.terms[0]) + self.expression + self.fullterm(self.terms[1])
         else:
@@ -119,7 +110,7 @@ class Join(object):
     def fullterm(self, term):
         """return the fully qualified term with table and column names"""
         column_name, table_id = term
-        return '%s.%s' % (self.universe.table_name(table_id), column_name)
+        return '%s.%s' % (self.universe.table_map[table_id].name, column_name)
 
 
 class Context(object):
@@ -154,14 +145,20 @@ class ObjectBase(object):
         self.select = None
         self.where = None
 
+    @property
+    def fullname(self):
+        if self.parent:
+            return '%s.%s' % (self.parent.name, self.name)
+        else:
+            return self.name
+
     def lookup_table(self, match):
         table_id = int(match.groups()[0])
         return self.universe.table_map[table_id].name
     
     def lookup_object(self, match):
         object_id = int(match.groups()[0])
-        obj = self.universe.object_map[object_id]
-        return '%s.%s' % (obj.parent.name, obj.name)
+        return self.universe.object_map[object_id].fullname
     
     def expand_sql(self, sql):
         """Return the SQL with table names instead of table IDs"""
@@ -193,7 +190,11 @@ class Object(ObjectBase):
         super(Object, self).__init__(universe, id_, parent, name, description)
         self.format = None
         self.lov_name = None
-        
+    
+    @classmethod
+    def unknown(cls):
+        return Object(None, -1, None, "Unknown", "This object has been deleted from the universe")
+
 
 class Condition(ObjectBase):
     
@@ -211,9 +212,20 @@ class Table(object):
         self.name = name
         self.schema = schema
 
+    @property
+    def fullname(self):
+        if schema:
+            return '%s.%s' % (self.schema, self.name)
+        else:
+            return self.name
+
     def __str__(self):
         return '%s id=%d, schema=%s name=%s' % (type(self), 
             self.id_, self.schema, self.name) 
+
+    @classmethod
+    def unknown(cls):
+        return Table(-1, None, "Unknown")
         
 
 class VirtualTable(object):
@@ -240,10 +252,12 @@ class Column(object):
         self.universe = universe
 
     @property
-    def table_name(self):
-        return self.universe.table_name(self.parent)
+    def fullname(self):
+        if self.parent:
+            return '%s.%s' % (self.parent.name, self.name)
+        else:
+            return self.name
 
-        
     def __cmp__(self, other):
         return cmp(self.id_, other.id_)
         

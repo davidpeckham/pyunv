@@ -74,7 +74,7 @@
     Columns
     
     % for column in universe.columns:
-        ${column.table_name}.${column.name}   id: ${column.id_}
+        ${column.fullname}   id: ${column.id_}
     % endfor
 
     Joins
@@ -86,5 +86,5 @@
     Contexts
     
     % for c in universe.contexts:
-        ${c.name} with joins ${c.join_list}   id: ${c.id_}, description: ${c.description}
+        ${c.name}   id: ${c.id_}, description: ${c.description}, joins: ${c.join_list} 
     % endfor

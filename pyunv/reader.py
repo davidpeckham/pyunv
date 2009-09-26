@@ -252,7 +252,8 @@ class Reader(object):
         
         """
         id_, = struct.unpack('<I', self.file.read(4))
-        parent, = struct.unpack('<I', self.file.read(4))
+        table_id, = struct.unpack('<I', self.file.read(4))
+        parent = self.universe.table_map[table_id]
         name = self.read_string()
         #print(name)
         return Column(id_, name, parent, self.universe)

@@ -16,23 +16,22 @@ PyUnv requires Mako to produce manifests. I include a sample template for a
 text manifest. If you come up with your own manifests in RST, HTML, or other,
 let me know.
 
-Installation
-============
+Installing
+==========
 
 Install PyUnv with easy_install::
 
     easy_install pyunv
 
-Sample Usage
-============
+Using
+=====
 
 With PyUnv installed, this should work::
 
     >>> from pyunv.reader import Reader
     >>> from pyunv.manifest import Manifest
     >>> universe = Reader(open('sample.unv', 'rb')).universe
-    >>> manifest = Manifest()
-    >>> manifest.save(open('manifest.txt', 'w'), universe)
+    >>> Manifest().save(open('manifest.txt', 'w'), universe)
 
 This will create a text manifest of the tables, columns, classes, objects, 
 and conditions in your universe.
@@ -54,8 +53,8 @@ and use your favorite file comparison tool (diff, p4diff, FileMerge, or even
 Microsoft Word) to highlight the differences. To track changes over time, just 
 store the manifest with your universe in a version control system.
 
-Roadmap
-=======
+Features
+========
 
 At this point, PyUnv reads basic universe information and classes, objects, 
 conditions, tables, and virtual tables from a universe file. The Python objects 
@@ -68,3 +67,9 @@ I'm testing PyUnv with universes created on BusinessObjects XI R2. I haven't
 tested it with earlier or later versions. I am still reverse-engineering other 
 metadata in the universe file. If you have questions, or would like to help, 
 just drop me a line.
+
+Not Yet Supported
+=================
+
+Object protection levels
+Object show/hide status
