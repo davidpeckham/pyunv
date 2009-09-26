@@ -28,7 +28,27 @@ class Universe(object):
         self.joins = []
         self.contexts = []
         self.parameters = None
+        self.table_map = {}
+        self.object_map = {}
 
+    def build_table_map(self):
+        """Construct a table map so we can expand where and select clauses"""
+        self.table_map = dict()
+        for t in self.tables:
+            self.table_map[t.id_] = t
+
+    def build_object_map(self):
+        """Construct an object map so we can expand where and select clauses"""
+        self.object_map = dict()
+        for c in self.classes:
+            self._map_objects(c)
+    
+    def _map_objects(self, c):
+        for o in c.objects:
+            self.object_map[o.id_] = o
+        for subclass in c.subclasses:
+            self._map_objects(subclass)
+        
     def table_name(self, table_id):
         try:
             tablename = self.table_map[table_id].name
@@ -135,18 +155,21 @@ class ObjectBase(object):
         self.where = None
 
     def lookup_table(self, match):
-        index = int(match.groups()[0])
-        try:
-            table = self.universe.table_map[index]
-            return table.name
-        except KeyError:
-            return 'UNKNOWN (%d)' % index
+        table_id = int(match.groups()[0])
+        return self.universe.table_map[table_id].name
+    
+    def lookup_object(self, match):
+        object_id = int(match.groups()[0])
+        obj = self.universe.object_map[object_id]
+        return '%s.%s' % (obj.parent.name, obj.name)
     
     def expand_sql(self, sql):
         """Return the SQL with table names instead of table IDs"""
         if sql:
             p = re.compile(r'(?:'+chr(3)+')([0-9]{1,4})')
-            return p.sub(self.lookup_table, sql)
+            expanded_sql = p.sub(self.lookup_table, sql)
+            p = re.compile(r'(?:'+chr(2)+')([0-9]{1,4})')
+            return p.sub(self.lookup_object, expanded_sql)
         else:
             return None
         

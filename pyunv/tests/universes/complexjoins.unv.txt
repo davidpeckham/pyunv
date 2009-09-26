@@ -35,46 +35,45 @@
     Objects
         
         Public Orderinfo
-            Orderinfo Id (9)  description: None, select: public.orderinfo.orderinfo_id, where: None
-            Customer Id (10)  description: None, select: public.orderinfo.customer_id, where: None
-            Date Placed (11)  description: None, select: public.orderinfo.date_placed, where: None
-            Date Shipped (12)  description: None, select: public.orderinfo.date_shipped, where: None
-            Shipping (13)  description: None, select: public.orderinfo.shipping, where: None
+            Orderinfo Id   id: 9, description: None, select: public.orderinfo.orderinfo_id, where: None
+            Customer Id   id: 10, description: None, select: public.orderinfo.customer_id, where: None
+            Date Placed   id: 11, description: None, select: public.orderinfo.date_placed, where: None
+            Date Shipped   id: 12, description: None, select: public.orderinfo.date_shipped, where: None
+            Shipping   id: 13, description: None, select: public.orderinfo.shipping, where: None
          		    
         Public Orderline
-            Orderinfo Id (1)  description: None, select: public.orderline.orderinfo_id, where: None
-            Item Id (2)  description: None, select: public.orderline.item_id, where: None
-            Quantity (3)  description: None, select: public.orderline.quantity, where: None
+            Orderinfo Id   id: 1, description: None, select: public.orderline.orderinfo_id, where: None
+            Item Id   id: 2, description: None, select: public.orderline.item_id, where: None
+            Quantity   id: 3, description: None, select: public.orderline.quantity, where: None
              
     
         
         Public Customer
-            Customer Id (14)  description: None, select: public.customer.customer_id, where: None
-            Title (15)  description: None, select: public.customer.title, where: None
-            Fname (16)  description: None, select: public.customer.fname, where: None
-            Lname (17)  description: None, select: public.customer.lname, where: None
-            Addressline (18)  description: None, select: public.customer.addressline, where: None
-            Town (19)  description: None, select: public.customer.town, where: None
-            Zipcode (20)  description: None, select: public.customer.zipcode, where: None
-            Phone (21)  description: None, select: public.customer.phone, where: None
+            Customer Id   id: 14, description: None, select: public.customer.customer_id, where: None
+            Title   id: 15, description: None, select: public.customer.title, where: None
+            Fname   id: 16, description: None, select: public.customer.fname, where: None
+            Lname   id: 17, description: None, select: public.customer.lname, where: None
+            Addressline   id: 18, description: None, select: public.customer.addressline, where: None
+            Town   id: 19, description: None, select: public.customer.town, where: None
+            Zipcode   id: 20, description: None, select: public.customer.zipcode, where: None
+            Phone   id: 21, description: None, select: public.customer.phone, where: None
              
         
         Public Item
-            Item Id (22)  description: None, select: public.item.item_id, where: None
-            Description (23)  description: None, select: public.item.description, where: None
-            Cost Price (24)  description: None, select: public.item.cost_price, where: None
-            Sell Price (25)  description: None, select: public.item.sell_price, where: None
+            Item Id   id: 22, description: None, select: public.item.item_id, where: None
+            Description   id: 23, description: None, select: public.item.description, where: None
+            Cost Price   id: 24, description: None, select: public.item.cost_price, where: None
+            Sell Price   id: 25, description: None, select: public.item.sell_price, where: None
          		    
         Public Stock
-            Item Id (28)  description: None, select: public.stock.item_id, where: None
-            Quantity (29)  description: None, select: public.stock.quantity, where: None
+            Item Id   id: 28, description: None, select: public.stock.item_id, where: None
+            Quantity   id: 29, description: None, select: public.stock.quantity, where: None
              
 		    
         Public Barcode
-            Barcode Ean (26)  description: None, select: public.barcode.barcode_ean, where: None
-            Item Id (27)  description: None, select: public.barcode.item_id, where: None
+            Barcode Ean   id: 26, description: None, select: public.barcode.barcode_ean, where: None
+            Item Id   id: 27, description: None, select: public.barcode.item_id, where: None
              
-    
     
     
     Conditions
@@ -89,16 +88,15 @@
              
         
         Public Item
-            Expensive (2)  description: True for items that are expensive., where: 25 > 1000
-            Cheap (3)  description: True for items that are cheap., where: 25 <= 1000
+            Expensive   id: 2, description: True for items that are expensive., where: Public Item.Sell Price > 1000
+            Cheap   id: 3, description: True for items that are cheap., where: Public Item.Sell Price <= 1000
          		    
         Public Stock
-            OutOfStock (1)  description: True when an item is out of stock., where: 29 = 0
+            OutOfStock   id: 1, description: True when an item is out of stock., where: Public Stock.Quantity = 0
              
 		    
         Public Barcode
              
-    
     
     
     Hierarchies
@@ -107,51 +105,51 @@
 
     Tables
 
-        None.public.barcode  id 1
-        None.public.customer  id 2
-        None.public.item  id 3
-        None.public.orderinfo  id 4
-        None.public.orderline  id 5
-        None.public.stock  id 6
-        None.CheapItems  id 7
-        None.ExpensiveItems  id 8
-        None.SalesOrders  id 9
-        None.Product  id 10
-        None.LineItem  id 11
+        public.barcode   id: 1
+        public.customer   id: 2
+        public.item   id: 3
+        public.orderinfo   id: 4
+        public.orderline   id: 5
+        public.stock   id: 6
+        CheapItems   id: 7
+        ExpensiveItems   id: 8
+        SalesOrders   id: 9
+        Product   id: 10
+        LineItem   id: 11
 
     Columns
     
-        public.barcode.barcode_ean  id 1
-        public.barcode.item_id  id 2
-        public.customer.customer_id  id 3
-        public.customer.title  id 4
-        public.customer.fname  id 5
-        public.customer.lname  id 6
-        public.customer.addressline  id 7
-        public.customer.town  id 8
-        public.customer.zipcode  id 9
-        public.customer.phone  id 10
-        public.item.item_id  id 11
-        public.item.description  id 12
-        public.item.cost_price  id 13
-        public.item.sell_price  id 14
-        public.orderinfo.orderinfo_id  id 15
-        public.orderinfo.customer_id  id 16
-        public.orderinfo.date_placed  id 17
-        public.orderinfo.date_shipped  id 18
-        public.orderinfo.shipping  id 19
-        public.orderline.orderinfo_id  id 20
-        public.orderline.item_id  id 21
-        public.orderline.quantity  id 22
-        public.stock.item_id  id 23
-        public.stock.quantity  id 24
+        public.barcode.barcode_ean   id: 1
+        public.barcode.item_id   id: 2
+        public.customer.customer_id   id: 3
+        public.customer.title   id: 4
+        public.customer.fname   id: 5
+        public.customer.lname   id: 6
+        public.customer.addressline   id: 7
+        public.customer.town   id: 8
+        public.customer.zipcode   id: 9
+        public.customer.phone   id: 10
+        public.item.item_id   id: 11
+        public.item.description   id: 12
+        public.item.cost_price   id: 13
+        public.item.sell_price   id: 14
+        public.orderinfo.orderinfo_id   id: 15
+        public.orderinfo.customer_id   id: 16
+        public.orderinfo.date_placed   id: 17
+        public.orderinfo.date_shipped   id: 18
+        public.orderinfo.shipping   id: 19
+        public.orderline.orderinfo_id   id: 20
+        public.orderline.item_id   id: 21
+        public.orderline.quantity   id: 22
+        public.stock.item_id   id: 23
+        public.stock.quantity   id: 24
 
     Joins
 
-        12 public.customer.customer_id<public.orderinfo.customer_id and public.customer.customer_id<public.orderinfo.orderinfo_id and public.customer.customer_id<public.orderinfo.date_placed and public.customer.customer_id<public.orderinfo.date_shipped and public.customer.customer_id<public.orderinfo.shipping
-        17 public.orderline.orderinfo_id=LineItem.orderinfo_id and public.orderline.item_id=LineItem.item_id and public.orderline.quantity=LineItem.quantity
+        public.customer.customer_id<public.orderinfo.customer_id and public.customer.customer_id<public.orderinfo.orderinfo_id and public.customer.customer_id<public.orderinfo.date_placed and public.customer.customer_id<public.orderinfo.date_shipped and public.customer.customer_id<public.orderinfo.shipping   id: 12 
+        public.orderline.orderinfo_id=LineItem.orderinfo_id and public.orderline.item_id=LineItem.item_id and public.orderline.quantity=LineItem.quantity   id: 17 
     
     Contexts
     
-        ItemStock: This is the ItemStock context. 9, 14
-        CustomerOrder: This is the CustomerOrder context. 12, 15
+        ItemStock with joins 9, 14   id: 2, description: This is the ItemStock context.
+        CustomerOrder with joins 12, 15   id: 1, description: This is the CustomerOrder context.

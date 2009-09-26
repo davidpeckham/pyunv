@@ -40,14 +40,13 @@
     <%def name="write_class_objects(uclass, level)">
         ${uclass.name}
         % for obj in uclass.objects:
-            ${obj.name} (${obj.id_})  description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
+            ${obj.name}   id: ${obj.id_}, description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
         % endfor
         <% level = level+1 %> \
 		% for subclass in uclass.subclasses:
 		    ${write_class_objects(subclass, level)}
 		% endfor
     </%def>
-    
     Conditions
     % for uclass in universe.classes:
         ${write_class_conditions(uclass, 1)}
@@ -55,14 +54,13 @@
     <%def name="write_class_conditions(uclass, level)">
         ${uclass.name}
         % for condition in uclass.conditions:
-            ${condition.name} (${condition.id_})  description: ${condition.description}, where: ${condition.where_sql}
+            ${condition.name}   id: ${condition.id_}, description: ${condition.description}, where: ${condition.where_sql}
         % endfor
         <% level = level+1 %> \
 		% for subclass in uclass.subclasses:
 		    ${write_class_conditions(subclass, level)}
 		% endfor
     </%def>
-    
     Hierarchies
     
         (pyunv does not support hierarchies yet)
@@ -70,23 +68,23 @@
     Tables
 
     % for table in universe.tables:
-        ${table.schema}.${table.name}  id ${table.id_}
+        ${table.name}   id: ${table.id_}
     % endfor
 
     Columns
     
     % for column in universe.columns:
-        ${column.table_name}.${column.name}  id ${column.id_}
+        ${column.table_name}.${column.name}   id: ${column.id_}
     % endfor
 
     Joins
 
     % for join in universe.joins:
-        ${join.id_} ${join.statement}
+        ${join.statement}   id: ${join.id_} 
     % endfor
     
     Contexts
     
     % for c in universe.contexts:
-        ${c.name}: ${c.description} ${c.join_list}
+        ${c.name} with joins ${c.join_list}   id: ${c.id_}, description: ${c.description}
     % endfor

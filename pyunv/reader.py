@@ -32,9 +32,7 @@ class Reader(object):
         self.universe = Universe()
         self.universe.parameters = self.read_parameters()
         self.universe.tables = self.read_tables()
-        self.universe.table_map = dict()
-        for table in self.universe.tables:
-            self.universe.table_map[table.id_] = table
+        self.universe.build_table_map()
         self.universe.virtual_tables = self.read_virtual_tables()
         self.universe.columns = self.read_columns()
         self.universe.columns.sort()
@@ -42,6 +40,8 @@ class Reader(object):
         self.universe.joins = self.read_joins()
         self.universe.contexts = self.read_contexts()
         self.universe.classes = self.read_classes()
+        self.universe.build_object_map()
+        
         
     def find_content_offsets(self):
         """find the offsets of the object, table, and column definitions 
@@ -205,7 +205,7 @@ class Reader(object):
         self.file.seek(self.content_offsets['Objects;'])
         class_count, object_count, condition_count, rootclass_count, = \
             struct.unpack('<4I', self.file.read(16))
-        return [self.read_class() for x in range(rootclass_count)]
+        return [self.read_class(None) for x in range(rootclass_count)]
         
     def read_table(self, schema):
         """read a table definition from the universe file
@@ -257,13 +257,13 @@ class Reader(object):
         #print(name)
         return Column(id_, name, parent, self.universe)
 
-    def read_class(self):
+    def read_class(self, parent):
         """read a BusinessObjects class definition from the universe file
 
         I subclass_count
         I id
         S name
-        I parent
+        I parent_id
         S description
         7B unknown
         I object_count
@@ -275,24 +275,28 @@ class Reader(object):
         """
         id_, = struct.unpack('<I', self.file.read(4))
         name = self.read_string()
-        parent, = struct.unpack('<I', self.file.read(4))
+        parent_id, = struct.unpack('<I', self.file.read(4))
+        if parent:
+            assert(parent_id==parent.id_)
+        else:
+            assert(parent_id == 0)
         description = self.read_string()
         c = Class(self.universe, id_, parent, name, description)
         self.file.seek(7, os.SEEK_CUR)
         object_count, = struct.unpack('<I', self.file.read(4))
-        c.objects = [self.read_object() for x in range(object_count)]
+        c.objects = [self.read_object(c) for x in range(object_count)]
         condition_count, = struct.unpack('<I', self.file.read(4))
-        c.conditions = [self.read_condition() for x in range(condition_count)]
+        c.conditions = [self.read_condition(c) for x in range(condition_count)]
         subclass_count, = struct.unpack('<I', self.file.read(4))
-        c.subclasses = [self.read_class() for x in range(subclass_count)]
+        c.subclasses = [self.read_class(c) for x in range(subclass_count)]
         return c
 
-    def read_object(self):
+    def read_object(self, parent):
         """read a BusinessObjects object definition from the universe file
 
         I id
         S name
-        I parent
+        I parent_id
         S description
         H select_table_count
         ?I select_table_ids (repeats select_table_count times)
@@ -308,7 +312,11 @@ class Reader(object):
        """
         id_, = struct.unpack('<I', self.file.read(4))
         name = self.read_string()
-        parent, = struct.unpack('<I', self.file.read(4))
+        parent_id, = struct.unpack('<I', self.file.read(4))
+        if parent:
+            assert(parent_id==parent.id_)
+        else:
+            assert(parent_id == 0)
         description = self.read_string()
         o = Object(self.universe, id_, parent, name, description)
         select_tablecount, = struct.unpack('<H', self.file.read(2))
@@ -323,12 +331,12 @@ class Reader(object):
         self.file.seek(58, os.SEEK_CUR)
         return o
 
-    def read_condition(self):
+    def read_condition(self, parent):
         """read a BusinessObjects condition definition from the universe file
 
         I id
         S name
-        I parent
+        I parent_id
         S description
         H where_tablecount
         ?I where_table_ids (repeats where_tablecount times)
@@ -339,7 +347,11 @@ class Reader(object):
         """
         id_, = struct.unpack('<I', self.file.read(4))
         name = self.read_string()
-        parent, = struct.unpack('<I', self.file.read(4))
+        parent_id, = struct.unpack('<I', self.file.read(4))
+        if parent:
+            assert(parent_id==parent.id_)
+        else:
+            assert(parent_id == 0)
         description = self.read_string()
         c = Condition(self.universe, id_, parent, name, description)
         where_tablecount, = struct.unpack('<H', self.file.read(2))
