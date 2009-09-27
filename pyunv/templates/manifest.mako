@@ -1,4 +1,3 @@
-## -*- coding: utf-8 -*-
     <%page args="universe"/>
     Universe Manifest
         <% parms = universe.parameters %>
@@ -35,30 +34,30 @@
 
     Objects
     % for uclass in universe.classes:
-        ${write_class_objects(uclass, 1)}
+        ${write_class_objects(uclass, 1)} \
     % endfor
     <%def name="write_class_objects(uclass, level)">
         ${uclass.name}
         % for obj in uclass.objects:
             ${obj.name}   id: ${obj.id_}, description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
         % endfor
-        <% level = level+1 %> \
+		<% level = level+1 %> \
 		% for subclass in uclass.subclasses:
-		    ${write_class_objects(subclass, level)}
+		    ${write_class_objects(subclass, level)} \
 		% endfor
     </%def>
     Conditions
     % for uclass in universe.classes:
-        ${write_class_conditions(uclass, 1)}
+        ${write_class_conditions(uclass, 1)} \
     % endfor
     <%def name="write_class_conditions(uclass, level)">
         ${uclass.name}
         % for condition in uclass.conditions:
             ${condition.name}   id: ${condition.id_}, description: ${condition.description}, where: ${condition.where_sql}
         % endfor
-        <% level = level+1 %> \
+		<% level = level+1 %> \
 		% for subclass in uclass.subclasses:
-		    ${write_class_conditions(subclass, level)}
+		    ${write_class_conditions(subclass, level)} \
 		% endfor
     </%def>
     Hierarchies
