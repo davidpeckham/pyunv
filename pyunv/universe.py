@@ -29,6 +29,7 @@ class Universe(object):
         self.joins = []
         self.contexts = []
         self.parameters = None
+        self.custom_parameters = None
         self.table_map = collections.defaultdict(Table.unknown)
         self.object_map = collections.defaultdict(Object.unknown)
 
@@ -144,6 +145,7 @@ class ObjectBase(object):
         self.where_table_refs = []
         self.select = None
         self.where = None
+        self.visible = True
 
     @property
     def fullname(self):

@@ -23,7 +23,8 @@ from pyunv.universe import Condition, Table, VirtualTable, Column, Context
 class Reader(object):
     
     _content_markers = ('Objects;', 'Tables;', 'Columns;', 'Contexts;',
-        'Virtual Tables;', 'Parameters;', 'Columns Id;', 'Joins;')
+        'Virtual Tables;', 'Parameters;', 'Columns Id;', 'Joins;',
+        'Parameters_6_0;')
     
     def __init__(self, f):
         super(Reader, self).__init__()
@@ -31,6 +32,7 @@ class Reader(object):
         self.find_content_offsets()
         self.universe = Universe()
         self.universe.parameters = self.read_parameters()
+        self.universe.custom_parameters = self.read_customparameters()
         self.universe.tables = self.read_tables()
         self.universe.build_table_map()
         self.universe.virtual_tables = self.read_virtual_tables()
@@ -41,8 +43,7 @@ class Reader(object):
         self.universe.contexts = self.read_contexts()
         self.universe.classes = self.read_classes()
         self.universe.build_object_map()
-        
-        
+
     def find_content_offsets(self):
         """find the offsets of the object, table, and column definitions 
         in the BusinessObjects universe file"""
@@ -89,7 +90,6 @@ class Reader(object):
         
         """
         self.file.seek(self.content_offsets['Parameters;'])
-        
         params = Parameters()
         struct.unpack('<2I', self.file.read(8))
         params.universe_filename = self.read_string()
@@ -117,7 +117,30 @@ class Reader(object):
         params.domain = self.read_string()
         params.dbms_engine = self.read_string()
         params.network_layer = self.read_string()
+        return params
+    
+    def read_customparameters(self):
+        """read the parameters defined on the Parameter tab of the 
+        Designer Parameters dialog
         
+        I count
+        array of parameters:
+            S universe_filename
+            S universe_name
+        
+         Other parameter blocks we don't parse yet:
+            Parameters_4_1;
+            Parameters_5_0;
+            Parameters_11_5;
+        
+        """
+        self.file.seek(self.content_offsets['Parameters_6_0;'])
+        params = dict()
+        count, = struct.unpack('<I', self.file.read(4))
+        for p in range(count):
+            name = self.read_string()
+            value = self.read_string()
+            params[name] = value
         return params
 
     def read_tables(self):
@@ -308,7 +331,9 @@ class Reader(object):
         S format
         S unknown
         S lov_name
-        58B unknown  (LOV settings, hide indicator?)
+        2x unknown
+        x visibility (show=0x36, hidden=0x76)
+        55B unknown  (LOV settings, hide indicator?)
 
        """
         id_, = struct.unpack('<I', self.file.read(4))
@@ -329,7 +354,10 @@ class Reader(object):
         o.format = self.read_string()
         unknown2 = self.read_string()
         o.lov_name = self.read_string()
-        self.file.seek(58, os.SEEK_CUR)
+        self.file.seek(2, os.SEEK_CUR)
+        visibility, = struct.unpack('<B', self.file.read(1))
+        o.visible = visibility != 0x36
+        self.file.seek(55, os.SEEK_CUR)
         return o
 
     def read_condition(self, parent):

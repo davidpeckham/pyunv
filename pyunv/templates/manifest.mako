@@ -26,7 +26,9 @@
 
     SQL Parameters
 
-        (pyunv does not support SQL parameters yet)
+    % for name, value in universe.custom_parameters.items():
+        ${name} = ${value}
+    % endfor
 
     Links
     
@@ -39,7 +41,7 @@
     <%def name="write_class_objects(uclass, level)">
         ${uclass.name}
         % for obj in uclass.objects:
-            ${obj.name}   id: ${obj.id_}, description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
+            ${obj.name}   id: ${obj.id_}, visible: ${obj.visible}, description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
         % endfor
 		<% level = level+1 %> \
 		% for subclass in uclass.subclasses:
