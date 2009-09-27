@@ -24,6 +24,7 @@ class Universe(object):
         self.description = description
         self.schema = None
         self.tables = []
+        self.virtual_tables = []
         self.columns = []
         self.classes = []
         self.joins = []
@@ -48,6 +49,39 @@ class Universe(object):
             self.object_map[o.id_] = o
         for subclass in c.subclasses:
             self._map_objects(subclass)
+    
+    @property
+    def statistics(self):
+        class Counter(ClassVisitor):
+            def __init__(self):
+                super(Counter, self).__init__()
+                self.classes = 0
+                self.objects = 0
+                self.conditions = 0
+                
+            def visit_class(self, cls):
+                self.classes += 1
+    
+            def visit_object(self, obj):
+                self.objects += 1
+
+            def visit_condition(self, cond):
+                self.conditions += 1
+        
+        counter = Counter()
+        for c in self.classes:
+            c.accept(counter)
+            
+        stats = dict()
+        stats["classes"] = counter.classes
+        stats["objects"] = counter.objects
+        stats["aliases"] = len([t for t in self.tables if t.is_alias])
+        stats["tables"] = len([t for t in self.tables if not t.is_alias])
+        stats["joins"] = len(self.joins)
+        stats["contexts"] = len(self.contexts)
+        # stats["hierarchies"] =
+        stats["conditions"] = counter.conditions
+        return stats
         
 
 class Parameters(object):
@@ -86,6 +120,15 @@ class Class(object):
         self.objects = []
         self.conditions = []
         self.subclasses = []
+
+    def accept(self, visitor):
+        visitor.visit_class(self)
+        for o in self.objects:
+            o.accept(visitor)
+        for c in self.conditions:
+            c.accept(visitor)
+        for s in self.subclasses:
+            s.accept(visitor)
 
 
 class Join(object):
@@ -197,6 +240,9 @@ class Object(ObjectBase):
     def unknown(cls):
         return Object(None, -1, None, "Unknown", "This object has been deleted from the universe")
 
+    def accept(self, visitor):
+        visitor.visit_object(self)
+
 
 class Condition(ObjectBase):
     
@@ -204,22 +250,34 @@ class Condition(ObjectBase):
     def __init__(self, universe, id_, parent, name, description):
         super(Condition, self).__init__(universe, id_, parent, name, description)
 
+    def accept(self, visitor):
+        visitor.visit_condition(self)
+
 
 class Table(object):
 
     """docstring for Table"""
-    def __init__(self, id_, name, schema):
+    def __init__(self, universe, id_, parent_id, name, schema):
         super(Table, self).__init__()
+        self.universe = universe
         self.id_ = id_
+        self.parent_id = parent_id
         self.name = name
         self.schema = schema
 
     @property
     def fullname(self):
-        if schema:
-            return '%s.%s' % (self.schema, self.name)
+        if self.schema:
+            s = '%s.%s' % (self.schema, self.name)
         else:
-            return self.name
+            s = self.name
+        if self.is_alias:
+            s += ' (alias for %s)' % self.universe.table_map[self.parent_id].fullname
+        return s
+    
+    @property
+    def is_alias(self):
+        return self.parent_id != 0
 
     def __str__(self):
         return '%s id=%d, schema=%s name=%s' % (type(self), 
@@ -227,14 +285,15 @@ class Table(object):
 
     @classmethod
     def unknown(cls):
-        return Table(-1, None, "Unknown")
+        return Table(None, -1, -1, None, "Unknown")
         
 
 class VirtualTable(object):
 
     """docstring for VirtualTable"""
-    def __init__(self, table_id=None, select=None):
+    def __init__(self, universe, table_id=None, select=None):
         super(VirtualTable, self).__init__()
+        self.universe = universe
         self.table_id = table_id
         self.select = select
 
@@ -268,3 +327,20 @@ class Column(object):
             self.id_, self.name, self.parent) 
         
 
+class ClassVisitor(object):
+    """Visits each node in the class, object, and condition hierarchy"""
+    def __init__(self):
+        super(ClassVisitor, self).__init__()
+    
+    def visit_class(self, cls):
+        """docstring for visit_class"""
+        pass
+    
+    def visit_object(self, obj):
+        """docstring for visit_object"""
+        pass
+
+    def visit_condition(self, condition):
+        """docstring for visit_condition"""
+        pass
+        

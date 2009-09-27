@@ -20,12 +20,9 @@ from pyunv.manifest import Manifest
 class ReaderTests(unittest.TestCase):
     def setUp(self):
         super(ReaderTests, self).setUp()
-        self.filename = 'pyunv/tests/universes/test.unv'
-        self.reader = Reader(open(self.filename, 'rb'))
     
     def tearDown(self):
         super(ReaderTests, self).tearDown()
-        del self.reader
             
     def test_date_from_dateindex1(self):
         date = datetime.date(1976,7,4)
@@ -39,13 +36,6 @@ class ReaderTests(unittest.TestCase):
         date = datetime.date(2009,9,15)
         self.assertEqual(Reader.date_from_dateindex(2455090), date)
         
-    def test_manifest(self):
-        universe = self.reader.universe
-        f = open(self.filename+'.txt', 'w')
-        manifest = Manifest()
-        manifest.save(f, universe)
-        f.close()
-
 
 class SampleUniverseXIR2(unittest.TestCase):
     def setUp(self):
@@ -64,22 +54,23 @@ class SampleUniverseXIR2(unittest.TestCase):
         f.close()
         
 
-class SampleUniverseComplexJoin(unittest.TestCase):
+class SampleUniverseOthers(unittest.TestCase):
     def setUp(self):
-        super(SampleUniverseComplexJoin, self).setUp()
-        self.filename = 'pyunv/tests/universes/complexjoins.unv'
-        self.reader = Reader(open(self.filename, 'rb'))
+        super(SampleUniverseOthers, self).setUp()
+        self.others = [
+            # 'pyunv/tests/universes/others/Customer Care Analytics.unv',  # errors - Tables; appears more than once
+            'pyunv/tests/universes/others/IT Service Management.unv',   # errors - Joins; appears more than once
+            ]
     
     def tearDown(self):
-        super(SampleUniverseComplexJoin, self).tearDown()
-        del self.reader
+        super(SampleUniverseOthers, self).tearDown()
             
     def test_manifest(self):
-        universe = self.reader.universe
-        f = open(self.filename+'.txt', 'w')
-        Manifest().save(f, universe)
-        f.close()
-
+        for unv in self.others:
+            reader = Reader(open(unv, 'rb'))
+            universe = reader.universe
+            Manifest().save(open(unv+'.txt', 'w'), universe)
+        
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,15 +1,27 @@
     <%page args="universe"/>
     Universe Manifest
         <% parms = universe.parameters %>
-        ${parms.universe_name} (${parms.universe_filename}.unv)
-        Revision ${parms.revision}
-
+        Name: ${parms.universe_name}
+        Filename: ${parms.universe_filename}.unv
         Description: ${parms.description}
-        Comments: ${parms.comments}
+        Domain: ${parms.domain}
+
+    General Information
+
         Created by: ${parms.created_by} on ${parms.created_date}
         Modified by: ${parms.modified_by} on ${parms.modified_date}
-        
-        Domain: ${parms.domain}
+        Comments: ${parms.comments}
+        Revision ${parms.revision}
+        Statistics: ${universe.statistics['classes']} classes
+                    ${universe.statistics['objects']} objects
+                    ${universe.statistics['tables']} tables
+                    ${universe.statistics['aliases']} aliases
+                    ${universe.statistics['joins']} joins
+                    ${universe.statistics['contexts']} contexts
+                    ${universe.statistics['conditions']} conditions
+
+    Connection
+
         Database engine: ${parms.dbms_engine}
         Network layer: ${parms.network_layer}
 
@@ -43,10 +55,10 @@
         % for obj in uclass.objects:
             ${obj.name}   id: ${obj.id_}, visible: ${obj.visible}, description: ${obj.description}, select: ${obj.select_sql}, where: ${obj.where_sql}
         % endfor
-		<% level = level+1 %> \
-		% for subclass in uclass.subclasses:
-		    ${write_class_objects(subclass, level)} \
-		% endfor
+        <% level = level+1 %> \
+        % for subclass in uclass.subclasses:
+            ${write_class_objects(subclass, level)} \
+        % endfor
     </%def>
     Conditions
     % for uclass in universe.classes:
@@ -57,10 +69,10 @@
         % for condition in uclass.conditions:
             ${condition.name}   id: ${condition.id_}, description: ${condition.description}, where: ${condition.where_sql}
         % endfor
-		<% level = level+1 %> \
-		% for subclass in uclass.subclasses:
-		    ${write_class_conditions(subclass, level)} \
-		% endfor
+        <% level = level+1 %> \
+        % for subclass in uclass.subclasses:
+            ${write_class_conditions(subclass, level)} \
+        % endfor
     </%def>
     Hierarchies
     
@@ -69,7 +81,7 @@
     Tables
 
     % for table in universe.tables:
-        ${table.name}   id: ${table.id_}
+        ${table.fullname}   id: ${table.id_}
     % endfor
 
     Columns

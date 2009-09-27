@@ -156,6 +156,7 @@ class Reader(object):
 
         """
         self.file.seek(self.content_offsets['Tables;'])
+        # pdb.set_trace()
         self.file.read(2)
         user_name = self.read_string()
         schema = self.read_string()
@@ -212,14 +213,15 @@ class Reader(object):
     def read_contexts(self):
         """docstring for read_contexts
         
+        I max_context_id?
         I context_count
-        I max_context_id
         contexts...
 
         """
         self.file.seek(self.content_offsets['Contexts;'])
-        count, = struct.unpack('<I', self.file.read(4))
+        # pdb.set_trace()
         max_id, = struct.unpack('<I', self.file.read(4))
+        count, = struct.unpack('<I', self.file.read(4))
         contexts = [self.read_context() for x in range(count)]
         return contexts
 
@@ -237,23 +239,25 @@ class Reader(object):
         7x
         3I unknown
         S table_name
-        13x
+        I parent_id
+        9x
         ? flag
-        H count
-        xxI unknown (count times)
+            H count
+            xxI unknown (count times)
         
         """
         id_, = struct.unpack('<I', self.file.read(4))
         self.file.read(19)
         name = self.read_string()
-        self.file.read(13)
+        parent_id, = struct.unpack('<I', self.file.read(4))
+        self.file.read(9)
         flag, = struct.unpack('<?', self.file.read(1))
         if flag:
           count, = struct.unpack('<H', self.file.read(2))
           self.file.read(4*count+3)
         else:
           self.file.read(1)
-        return Table(id_, name, schema)
+        return Table(self.universe, id_, parent_id, name, schema)
 
     def read_virtualtable(self):
         """read a virtual table definition from the universe file
@@ -264,7 +268,7 @@ class Reader(object):
         """
         table_id, = struct.unpack('<I', self.file.read(4))
         select = self.read_string()
-        return VirtualTable(table_id, select)
+        return VirtualTable(self.universe, table_id, select)
 
     def read_column(self):
         """read a column definition from the universe file
