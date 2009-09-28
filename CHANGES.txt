@@ -1,5 +1,16 @@
 0.2.1  September 27, 2009
-- 
+- Universe now shows object name (instead of index) in where clauses
+- Reader now parses contexts
+- Reader now handles universe files with "false" section markers
+- Reader now differentiates between tables and aliases
+- Reader now parses custom parameters from the universe file
+- Added universe.ClassVisitor to make it easier to apply your own logic to the 
+  class/object/condition tree
+- Manifest template now displays universe statistics -- number of tables, classes,
+  joins, etc.
+- Manifest template no longer produces extra blank lines
+- Universe now gracefully handles dangling references. When you delete a universe
+  table, column, or object, Designer does not cleanup any references to the entity.
 
 0.2.0  September 24, 2009
 - Now parses universe joins
