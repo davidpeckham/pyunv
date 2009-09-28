@@ -9,7 +9,7 @@ universe settings, classes, objects, conditions, and source tables and columns
 from the universe file.
 
 PyUnv requires Mako to produce manifests. I include a sample template for a
-text manifest. If you come up with your own manifests in RST, HTML, or other,
+text manifest. If you come up with your own HTML, PDF, or RST manifests,
 let me know.
 """
 
@@ -27,7 +27,7 @@ Topic :: Software Development :: Libraries :: Python Modules
 
 setup(
     name = 'pyunv',
-    version = '0.2.0',
+    version = '0.2.1',
     
     author='David Peckham',
     author_email = 'dave.peckham@me.com',

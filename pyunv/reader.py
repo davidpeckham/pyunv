@@ -46,11 +46,23 @@ class Reader(object):
 
     def find_content_offsets(self):
         """find the offsets of the object, table, and column definitions 
-        in the BusinessObjects universe file"""
+        in the BusinessObjects universe file.
+        
+        In some universe files, the markers appear more than once. In most
+        cases, the first occurence is the right one. One exception is when
+        the marker recurs almost immediately -- in this case we need to skip
+        over the false marker and search the rest of the file.
+        """
+        
         self.content_offsets = dict()
         contents = self.file.read()
         for marker in Reader._content_markers:
-            self.content_offsets[marker] = contents.find(chr(0)+marker) + len(marker) + 1
+            begin = contents.find(chr(0)+marker)
+            end = begin + len(marker) + 1
+            if contents.find(marker, begin-20, begin) != -1 or contents.find(marker, end, end+20) != -1:
+                begin = contents.find(chr(0)+marker, end+20)
+                end = begin + len(marker) + 1
+            self.content_offsets[marker] = end
         del contents
         return
     

@@ -54,24 +54,6 @@ class SampleUniverseXIR2(unittest.TestCase):
         f.close()
         
 
-class SampleUniverseOthers(unittest.TestCase):
-    def setUp(self):
-        super(SampleUniverseOthers, self).setUp()
-        self.others = [
-            # 'pyunv/tests/universes/others/Customer Care Analytics.unv',  # errors - Tables; appears more than once
-            'pyunv/tests/universes/others/IT Service Management.unv',   # errors - Joins; appears more than once
-            ]
-    
-    def tearDown(self):
-        super(SampleUniverseOthers, self).tearDown()
-            
-    def test_manifest(self):
-        for unv in self.others:
-            reader = Reader(open(unv, 'rb'))
-            universe = reader.universe
-            Manifest().save(open(unv+'.txt', 'w'), universe)
-        
-
 if __name__ == '__main__':
     unittest.main()
 
