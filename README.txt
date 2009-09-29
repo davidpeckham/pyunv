@@ -31,45 +31,20 @@ With PyUnv installed, this should work::
     >>> from pyunv.reader import Reader
     >>> from pyunv.manifest import Manifest
     >>> universe = Reader(open('sample.unv', 'rb')).universe
-    >>> Manifest().save(open('manifest.txt', 'w'), universe)
+    >>> Manifest(universe).save(open('manifest.txt', 'w'))
 
 This will create a text manifest of the tables, columns, classes, objects, 
 and conditions in your universe.
 
-Applications
-============
+Use diff, FileMerge, or your favorite file comparison tool to compare
+manifests so you can track changes between releases.
 
-I wrote the earliest versions of PyUnv to extract descriptions for classes, 
-objects, and conditions from the universe file. After reverse-engineering more 
-of the universe file format, I saw PyUnv as a way to workaround limitations of 
-the BusinessObjects development tools. For example, BusinessObjects Designer 
-provides no support for change tracking. If you want to know what changed 
-between two versions of a universe, you open the first universe in one 
-Designer window and the second in another window, and then compare them 
-visually. That is impractical for all but the simplest universes.
+Limitations
+===========
 
-With PyUnv, you can export all of the universe metadata to a text manifest file 
-and use your favorite file comparison tool (diff, p4diff, FileMerge, or even 
-Microsoft Word) to highlight the differences. To track changes over time, just 
-store the manifest with your universe in a version control system.
+I've tested this with BusinessObjects XI R2 universes. It parses 
+most of the information stored in a universe file, but not all. 
+Try it on your universes to see if it extracts what you need.
 
-Features
-========
-
-At this point, PyUnv reads basic universe information and classes, objects, 
-conditions, tables, and virtual tables from a universe file. The Python objects 
-defined in PyUnv mirror the entities from the universe file, and are arranged in 
-memory in a tree structure as you would see them in Designer. For objects and 
-conditions, you can get the description, select statement, where statement, 
-and more.
-
-I'm testing PyUnv with universes created on BusinessObjects XI R2. I haven't
-tested it with earlier or later versions. I am still reverse-engineering other 
-metadata in the universe file. If you have questions, or would like to help, 
-just drop me a line.
-
-Not Yet Supported
-=================
-
-Object protection levels
-Object show/hide status
+PyUnv will likely not parse universes created in BusinessObjects 6.5.
+If it works for your 6.5 universes, please let me know.

@@ -50,10 +50,7 @@ class SampleUniverseXIR2(unittest.TestCase):
         del self.reader
             
     def test_manifest(self):
-        universe = self.reader.universe
-        f = open(self.filename+'.txt', 'w')
-        Manifest().save(f, universe)
-        f.close()
+        Manifest(self.reader.universe).save(open(self.filename+'.txt', 'w'))
         
 
 if __name__ == '__main__':

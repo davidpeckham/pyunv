@@ -16,14 +16,14 @@ from mako.template import Template
 
 class Manifest:
     
-    def __init__(self):
-        pass
+    def __init__(self, universe):
+        self.universe = universe
 
-    def save(self, f, universe):
+    def save(self, f):
         """docstring for write_manifest"""
         template = Template(filename='pyunv/templates/manifest.mako', 
             output_encoding='utf-8', encoding_errors='replace')
-        f.write(template.render(universe=universe))
+        f.write(template.render(universe=self.universe))
 
 
 class ManifestTests(unittest.TestCase):
