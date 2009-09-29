@@ -12,18 +12,22 @@ import os
 import unittest
 import csv
 
+
 class CsvWriter(object):
+    
     """Write an inventory of a universe's classes, objects, 
         and conditions to a CSV file
 
     class, name, id, parent, description, select, where
 
     """
+    
     def __init__(self, universe, csvfile):
         super(CsvWriter, self).__init__()
         self.universe = universe
         self.file = csvfile
-        writer = csv.writer(self.file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        writer = csv.writer(self.file, delimiter=',', quotechar='"', 
+            quoting=csv.QUOTE_MINIMAL)
         for c in universe.classes:
             self.write_class(writer, c, '')
 
@@ -41,7 +45,9 @@ class CsvWriter(object):
             self.write_class(writer, subclass, classpath)
 
     def write_object(self, writer, o, classpath):
-        writer.writerow((classpath, o.name, 'object', o.description, o.select_sql, o.where_sql))
+        writer.writerow((classpath, o.name, 'object', o.description, 
+            o.select_sql, o.where_sql))
 
     def write_condition(self, writer, c, classpath):
-        writer.writerow((classpath, c.name, 'condition', c.description, None, c.where_sql))
+        writer.writerow((classpath, c.name, 'condition', c.description, 
+            None, c.where_sql))

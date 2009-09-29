@@ -18,5 +18,3 @@
 __version__ = "0.1.8"
 
 __all__ = ["universe"]
-
-# from universe import Universe, Parameters, Class, Object, Condition, Table, VirtualTable

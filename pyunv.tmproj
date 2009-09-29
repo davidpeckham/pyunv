@@ -25,14 +25,16 @@
 			<string>CHANGES.txt</string>
 			<key>lastUsed</key>
 			<date>2009-09-28T00:19:16Z</date>
-			<key>selected</key>
-			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>COPYING.txt</string>
+			<string>LICENSE.txt</string>
+		</dict>
+		<dict>
+			<key>filename</key>
+			<string>README.txt</string>
 			<key>lastUsed</key>
-			<date>2009-09-28T00:05:13Z</date>
+			<date>2009-09-26T19:30:50Z</date>
 		</dict>
 		<dict>
 			<key>expanded</key>
@@ -46,15 +48,9 @@
 		</dict>
 		<dict>
 			<key>filename</key>
-			<string>README.txt</string>
-			<key>lastUsed</key>
-			<date>2009-09-26T19:30:50Z</date>
-		</dict>
-		<dict>
-			<key>filename</key>
 			<string>setup.py</string>
 			<key>lastUsed</key>
-			<date>2009-09-28T00:05:05Z</date>
+			<date>2009-09-29T04:38:39Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -64,6 +60,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{13, 4}, {942, 774}}</string>
+	<string>{{22, 235}, {877, 673}}</string>
 </dict>
 </plist>

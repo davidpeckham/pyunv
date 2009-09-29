@@ -1,2 +1,0 @@
-Where condition using objects
-Where condition using columns

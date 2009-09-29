@@ -15,6 +15,7 @@ from mako.template import Template
 
 
 class Manifest:
+    
     def __init__(self):
         pass
 
@@ -24,7 +25,9 @@ class Manifest:
             output_encoding='utf-8', encoding_errors='replace')
         f.write(template.render(universe=universe))
 
+
 class ManifestTests(unittest.TestCase):
+    
     def setUp(self):
         pass
 

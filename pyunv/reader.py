@@ -59,7 +59,8 @@ class Reader(object):
         for marker in Reader._content_markers:
             begin = contents.find(chr(0)+marker)
             end = begin + len(marker) + 1
-            if contents.find(marker, begin-20, begin) != -1 or contents.find(marker, end, end+20) != -1:
+            if contents.find(marker, begin-20, begin) != -1 or \
+                    contents.find(marker, end, end+20) != -1:
                 begin = contents.find(chr(0)+marker, end+20)
                 end = begin + len(marker) + 1
             self.content_offsets[marker] = end
@@ -201,9 +202,9 @@ class Reader(object):
         #print('count1 %d  count2 %d' % (column_count, column_count2))
         return [self.read_column() for x in range(column_count2)]
     
-    # def read_column_attributes(self):
-    #     """read the column attributes (after marker Columns;)"""
-    #     pass
+    def read_column_attributes(self):
+        """read the column attributes (after marker Columns;)"""
+        pass
 
     def read_joins(self):
         """docstring for read_joins
@@ -265,10 +266,10 @@ class Reader(object):
         self.file.read(9)
         flag, = struct.unpack('<?', self.file.read(1))
         if flag:
-          count, = struct.unpack('<H', self.file.read(2))
-          self.file.read(4*count+3)
+            count, = struct.unpack('<H', self.file.read(2))
+            self.file.read(4*count+3)
         else:
-          self.file.read(1)
+            self.file.read(1)
         return Table(self.universe, id_, parent_id, name, schema)
 
     def read_virtualtable(self):
@@ -362,9 +363,11 @@ class Reader(object):
         description = self.read_string()
         o = Object(self.universe, id_, parent, name, description)
         select_tablecount, = struct.unpack('<H', self.file.read(2))
-        struct.unpack('<%dI' % select_tablecount, self.file.read(4 * select_tablecount))
+        struct.unpack('<%dI' % select_tablecount, 
+            self.file.read(4 * select_tablecount))
         where_tablecount, = struct.unpack('<H', self.file.read(2))
-        struct.unpack('<%dI' % where_tablecount, self.file.read(4 * where_tablecount))
+        struct.unpack('<%dI' % where_tablecount, 
+            self.file.read(4 * where_tablecount))
         o.select = self.read_string()
         o.where = self.read_string()
         o.format = self.read_string()
@@ -377,7 +380,8 @@ class Reader(object):
         return o
 
     def read_condition(self, parent):
-        """read a BusinessObjects condition definition from the universe file
+        """read a BusinessObjects condition definition from 
+        the universe file
 
         I id
         S name
@@ -400,9 +404,11 @@ class Reader(object):
         description = self.read_string()
         c = Condition(self.universe, id_, parent, name, description)
         where_tablecount, = struct.unpack('<H', self.file.read(2))
-        struct.unpack('<%dI' % where_tablecount, self.file.read(4 * where_tablecount))
+        struct.unpack('<%dI' % where_tablecount, 
+            self.file.read(4 * where_tablecount))
         unknown_tablecount, = struct.unpack('<H', self.file.read(2))
-        struct.unpack('<%dI' % unknown_tablecount, self.file.read(4 * unknown_tablecount))
+        struct.unpack('<%dI' % unknown_tablecount, 
+            self.file.read(4 * unknown_tablecount))
         c.where = self.read_string()
         return c
 
@@ -464,6 +470,8 @@ class Reader(object):
 
     @classmethod
     def date_from_dateindex(cls, dateindex):
-        """return the date corresponding to the BusinessObjects universe date index"""
+        """return the date corresponding to the BusinessObjects 
+        universe date index"""
         assert dateindex >= 2442964, 'dateindex must be <= 2442964'
-        return datetime.date(1976,7,4) + datetime.timedelta(dateindex-2442964)
+        return datetime.date(1976, 7, 4) + \
+            datetime.timedelta(dateindex-2442964)
