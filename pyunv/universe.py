@@ -98,7 +98,7 @@ class Parameters(object):
         self.created_date = None
         self.modified_date = None
         self.query_time_limit = 0
-        self.row_limit = 0
+        self.query_row_limit = 0
         self.object_strategy = None
         self.cost_estimate_warning_limit = 0
         self.long_text_limit = 0

@@ -32,7 +32,7 @@
     Controls
 
         Query time limit: ${parms.query_time_limit} minutes
-        Query row limit: ${parms.row_limit} rows
+        Query row limit: ${parms.query_row_limit} rows
         Cost estimate warning limit: ${parms.cost_estimate_warning_limit} minutes
         Long text limit: ${parms.long_text_limit} characters
 

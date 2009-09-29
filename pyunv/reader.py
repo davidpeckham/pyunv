@@ -82,7 +82,7 @@ class Reader(object):
         I created_date
         I modified_date
         I query_time_limit (seconds)
-        I row_limit
+        I query_row_limit
         S unknown
         S object_strategy
         x unknown
@@ -117,7 +117,7 @@ class Reader(object):
         params.modified_date = Reader.date_from_dateindex(modified)
         seconds, = struct.unpack('<I', self.file.read(4))
         params.query_time_limit = seconds / 60
-        params.row_limit, = struct.unpack('<I', self.file.read(4))
+        params.query_row_limit, = struct.unpack('<I', self.file.read(4))
         self.read_string()
         params.object_strategy = self.read_string()
         struct.unpack('<x', self.file.read(1))

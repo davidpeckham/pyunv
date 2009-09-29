@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>setup.py</string>
+	<string>pyunv/tests/test_reader.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -54,53 +54,35 @@
 			<key>filename</key>
 			<string>setup.py</string>
 			<key>lastUsed</key>
-			<date>2009-09-29T06:15:50Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2009-09-29T15:47:24Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>281</integer>
 	<key>metaData</key>
 	<dict>
-		<key>setup.py</key>
+		<key>pyunv/tests/test_reader.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
+				<integer>26</integer>
 				<key>line</key>
-				<integer>2</integer>
+				<integer>60</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>39</integer>
-				<key>line</key>
-				<integer>2</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>2</integer>
-				<key>line</key>
-				<integer>2</integer>
-			</dict>
+			<integer>114</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>setup.py</string>
+		<string>pyunv/tests/test_reader.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{70, 54}, {877, 673}}</string>
+	<string>{{21, 265}, {877, 673}}</string>
 </dict>
 </plist>
