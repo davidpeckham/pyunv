@@ -139,6 +139,12 @@ class SampleUniverseXIR2(unittest.TestCase):
             
     def test_condition_count(self):
         self.assertEqual(self.universe.statistics['conditions'], 6)
+
+    def test_custom_parameters(self):
+        self.assert_(self.universe.custom_parameters['SAMPLE_PARAMETER1'] == '999333')
+        self.assert_(self.universe.custom_parameters['OLAP_UNIVERSE'] == 'No')
+        self.assert_(self.universe.custom_parameters['ANSI92'] == 'YES')
+        self.assert_(self.universe.custom_parameters['SAMPLE_PARAMETER2'] == '999222')
             
     def test_manifest(self):
         Manifest(self.universe).save(open(self.filename+'.txt', 'w'))
