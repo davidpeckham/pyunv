@@ -42,7 +42,7 @@ class SampleUniverseXIR2(unittest.TestCase):
     
     def setUp(self):
         super(SampleUniverseXIR2, self).setUp()
-        self.filename = 'pyunv/tests/universes/universe_xir2.unv'
+        self.filename = 'tests/universes/universe_xir2.unv'
         self.reader = Reader(open(self.filename, 'rb'))
         self.universe = self.reader.universe
     

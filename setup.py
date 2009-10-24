@@ -1,18 +1,29 @@
-from setuptools import setup, find_packages
-import py2exe
+#!/usr/bin/python
+##
+##	   Copyright (c) 2009 David Pekcham
+##
+
+"""This package reads a SAP BusinessObjects universe (.unv) file
+and creates a text manifest that includes universe settings, 
+classes, objects, conditions, source tables, source columns, and 
+joins. You can use your favorite diff tool to compare manifests 
+and track changes between versions of your universes.
+"""
 
 # python setup.py register sdist upload
 # python setup.py py2exe
 
-SUMMARY = """
-PyUnv reads SAP BusinessObjects universe (.unv) files. PyUnv can
-extract universe settings, classes, objects, conditions, and 
-source tables and columns from the universe file.
+from pyunv import __version__
 
-PyUnv requires Mako to produce text file manifests. I include a 
-sample template for a text manifest. If you come up with your 
-own HTML, PDF, or RST manifests, let me know.
-"""
+import sys, os, string
+from setuptools import setup, find_packages
+from distutils.errors import *
+
+if sys.version_info < (2, 6):
+    raise DistutilsError, "This package requires Python 2.6 or later"
+
+if sys.platform[:3] == "win":
+    import py2exe
 
 CLASSIFIERS = """
 Development Status :: 2 - Pre-Alpha
@@ -27,8 +38,8 @@ Topic :: Software Development :: Libraries :: Python Modules
 
 setup(
     name = 'pyunv',
-    version = '0.2.4',
-    author='David Peckham',
+    version = __version__,
+    author = 'David Peckham',
     author_email = 'dave.peckham@me.com',
     classifiers = filter(None, CLASSIFIERS.split("\n")),
     console = ['docunv.py'],
@@ -36,14 +47,14 @@ setup(
     download_url = 'http://code.google.com/p/pyunv/downloads/list',
     include_package_data = True,
     install_requires = ['Mako'],
-    keywords = ['encoding', 'BusinessObjects', 'SAP', 'universe', 'unv'],
+    keywords = ['BusinessObjects', 'SAP', 'universe', 'unv'],
     license = 'LGPL',
-    long_description = SUMMARY.strip(),
-    packages = find_packages(),
+    long_description = __doc__,
+    packages = ['pyunv'],
     platforms = ['Many'],
     provides = ['pyunv'],
-    test_suite = 'pyunv.tests',
+    test_suite = 'tests',
     url = 'http://code.google.com/p/pyunv/',
     zip_safe = False,
-    zipfile = None,
+    zipfile = None, # bundle the standard library into the py2exe executable
     )

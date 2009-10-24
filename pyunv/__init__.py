@@ -15,6 +15,15 @@
 # 02110-1301  USA
 ######################### END LICENSE BLOCK #########################
 
+"""
+PyUnv: Parse and document your SAP BusinessObjects XI universe (.unv) files.
+"""
+
+# Ensure the user is running the version of python we require.
+import sys
+if not hasattr(sys, "version_info") or sys.version_info < (2,6):
+    raise RuntimeError("PyUnv requires Python 2.6 or later.")
+del sys
+
 __version__ = "0.2.4"
 
-__all__ = ["universe"]
