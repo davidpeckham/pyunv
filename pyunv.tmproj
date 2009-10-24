@@ -48,7 +48,7 @@
 			<key>filename</key>
 			<string>docunv.py</string>
 			<key>lastUsed</key>
-			<date>2009-10-24T21:54:54Z</date>
+			<date>2009-10-24T22:11:34Z</date>
 			<key>selected</key>
 			<true/>
 		</dict>
@@ -78,30 +78,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>34</integer>
 				<key>line</key>
-				<integer>70</integer>
+				<integer>45</integer>
 			</dict>
-			<key>columnSelection</key>
-			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>36</integer>
-			<key>selectFrom</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>66</integer>
-			</dict>
-			<key>selectTo</key>
-			<dict>
-				<key>column</key>
-				<integer>0</integer>
-				<key>line</key>
-				<integer>70</integer>
-			</dict>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
