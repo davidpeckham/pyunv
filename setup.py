@@ -44,6 +44,6 @@ setup(
     provides = ['pyunv'],
     test_suite = 'pyunv.tests',
     url = 'http://code.google.com/p/pyunv/',
-    use_2to3 = False,
     zip_safe = False,
+    zipfile = None,
     )
