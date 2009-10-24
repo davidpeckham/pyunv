@@ -1,6 +1,8 @@
 from setuptools import setup, find_packages
+import py2exe
 
 # python setup.py register sdist upload
+# python setup.py py2exe
 
 SUMMARY = """
 PyUnv reads SAP BusinessObjects universe (.unv) files. PyUnv can
@@ -25,29 +27,23 @@ Topic :: Software Development :: Libraries :: Python Modules
 
 setup(
     name = 'pyunv',
-    version = '0.2.2',
+    version = '0.2.4',
     author='David Peckham',
     author_email = 'dave.peckham@me.com',
     classifiers = filter(None, CLASSIFIERS.split("\n")),
+    console = ['docunv.py'],
     description = 'Parse SAP BusinessObjects universe (*.unv) files',
     download_url = 'http://code.google.com/p/pyunv/downloads/list',
     include_package_data = True,
     install_requires = ['Mako'],
     keywords = ['encoding', 'BusinessObjects', 'SAP', 'universe', 'unv'],
     license = 'LGPL',
-    # long_description = SUMMARY.strip() + '\n\n' + file('CHANGES.txt').read(),
     long_description = SUMMARY.strip(),
-    #packages = find_packages(exclude=['pyunv.tests']),
     packages = find_packages(),
     platforms = ['Many'],
     provides = ['pyunv'],
     test_suite = 'pyunv.tests',
     url = 'http://code.google.com/p/pyunv/',
+    use_2to3 = False,
     zip_safe = False,
-    # package_data = {
-    #     # If any package contains *.txt or *.rst files, include them:
-    #     '': ['*.txt', '*.rst', '*.mako'],
-    #     # And include any *.unv files found in the 'tests' package:
-    #     'tests': ['*.unv'],
-    # },
     )
