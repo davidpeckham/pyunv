@@ -71,5 +71,5 @@ setup(
     console = ['docunv.py'],
     zipfile = None, # bundle the standard library into the py2exe executable
 
-    OPTIONS,
+    options = OPTIONS,
     )
