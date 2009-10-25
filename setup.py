@@ -28,6 +28,8 @@ if sys.version_info < (2, 6):
 if sys.platform[:3] == "win":
     import py2exe
 
+LONG_DESCRIPTION = open("README.txt", "U").read()
+
 CLASSIFIERS = """
 Development Status :: 2 - Pre-Alpha
 Environment :: Other Environment
@@ -63,7 +65,7 @@ setup(
     install_requires = ['Mako'],
     keywords = ['BusinessObjects', 'SAP', 'universe', 'unv'],
     license = 'LGPL',
-    long_description = __doc__,
+    long_description = LONG_DESCRIPTION,
     packages = ['pyunv'],
     platforms = ['Many'],
     provides = ['pyunv'],

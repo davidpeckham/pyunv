@@ -1,3 +1,11 @@
+0.2.3  October 25, 2009
+- Added docunv, a console program that creates universe manifests
+- Added support for py2exe (use "python setup.py py2exe" to create a Windows console version of docunv)
+- Manifest constructor now accepts a custom Mako template
+- Moved unit tests out of the pyunv source folder
+- Added more reader.Reader unit tests
+- Renamed Parameters.row_limit to query_row_limit
+
 0.2.2  September 28, 2009
 - Manifest constructor now takes the universe an argument
 - PyUnv source now conforms to PEP8 (thanks pep8!)

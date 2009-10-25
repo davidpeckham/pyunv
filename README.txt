@@ -3,18 +3,11 @@
 Introduction
 ============
 
-PyUnv reads SAP BusinessObjects universe (.unv) files. In BusinessObjects, a 
-universe provides a metadata layer above enterprise databases, expressed in 
-language that is easier for business users to understand than the underlying 
-data structures. Universes are edited with the BusinessObjects Designer and 
-saved to universe files in an undocumented binary format. PyUnv can extract 
-most of this metadata from the universe file, enabling you to use it outside 
-BusinessObjects, or to create tools to streamline your BusinessObjects 
-development process.
-
-PyUnv requires Mako to produce manifests. I include a sample template for a
-text manifest. If you come up with your own manifests in RST, HTML, or other,
-let me know.
+This package reads a SAP BusinessObjects universe (.unv) file
+and creates a text manifest that includes universe settings,
+classes, objects, conditions, source tables, source columns, and
+joins. You can use your favorite diff tool to compare manifests
+and track changes between versions of your universes.
 
 Installing
 ==========
@@ -26,7 +19,11 @@ Install PyUnv with easy_install::
 Using
 =====
 
-With PyUnv installed, this should work::
+With PyUnv installed, this will create a universe manifest::
+
+    $ python docunv.py tests/universes/universe_xir2.unv
+    
+or write your own version using pyunv::
 
     >>> from pyunv.reader import Reader
     >>> from pyunv.manifest import Manifest
@@ -48,3 +45,6 @@ Try it on your universes to see if it extracts what you need.
 
 PyUnv will likely not parse universes created in BusinessObjects 6.5.
 If it works for your 6.5 universes, please let me know.
+
+PyUnv may work with universes created by BusinessObjects XI R3. 
+Let me know if you try this.
