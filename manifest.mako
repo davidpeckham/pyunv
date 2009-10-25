@@ -1,3 +1,14 @@
+<%doc>
+    manifest.mako
+
+    This is the default Mako template for the PyUnv universe manifest file.
+    Customize this template, or replace it with your own. See the manifest
+    module for instructions on using another template.
+
+    Created by David Peckham on 2009-10-24.
+    Copyright (c) 2009 David Peckham. All rights reserved.
+</%doc>
+
     <%page args="universe"/>
     Universe Manifest
         <% parms = universe.parameters %>

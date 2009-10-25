@@ -3,12 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>setup.py</string>
+	<string>docunv.py</string>
 	<key>documents</key>
 	<array>
 		<dict>
-			<key>expanded</key>
-			<true/>
 			<key>name</key>
 			<string>docs</string>
 			<key>regexFolderFilter</key>
@@ -48,19 +46,17 @@
 			<key>filename</key>
 			<string>docunv.py</string>
 			<key>lastUsed</key>
-			<date>2009-10-25T00:59:53Z</date>
+			<date>2009-10-25T09:10:33Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>setup.py</string>
 			<key>lastUsed</key>
-			<date>2009-10-25T08:37:00Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2009-10-25T08:42:08Z</date>
 		</dict>
 		<dict>
-			<key>expanded</key>
-			<true/>
 			<key>name</key>
 			<string>tests</string>
 			<key>regexFolderFilter</key>
@@ -68,29 +64,35 @@
 			<key>sourceDirectory</key>
 			<string>tests</string>
 		</dict>
+		<dict>
+			<key>filename</key>
+			<string>manifest.mako</string>
+			<key>lastUsed</key>
+			<date>2009-10-25T09:05:35Z</date>
+		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
 	<integer>189</integer>
 	<key>metaData</key>
 	<dict>
-		<key>setup.py</key>
+		<key>docunv.py</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>23</integer>
+				<integer>14</integer>
 				<key>line</key>
-				<integer>66</integer>
+				<integer>19</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>33</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
-		<string>setup.py</string>
+		<string>docunv.py</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>

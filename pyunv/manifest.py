@@ -16,12 +16,16 @@ from mako.template import Template
 
 class Manifest:
     
-    def __init__(self, universe):
+    def __init__(self, universe, template=None):
         self.universe = universe
+        if template:
+            self.template = template
+        else:
+            self.template = 'manifest.mako'
 
     def save(self, f):
         """docstring for write_manifest"""
-        template = Template(filename='manifest.mako', 
+        template = Template(filename=self.template, 
             output_encoding='utf-8', encoding_errors='replace')
         f.write(template.render(universe=self.universe))
 

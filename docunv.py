@@ -17,8 +17,17 @@ from pyunv.manifest import Manifest
 help_message = '''
 Create a text manifest for your BusinessObjects XI R2 universe.
 
-Example:
+pyunv options universe.unv
+
+where options are:
+
+-m  --manifest   manifest output file 
+-t  --template   manifest template
+-h  --help       show this help
+
+Examples:
   docunv universe.unv
+  docunv universe.unv --template manifest.mako --manifest universe.manifest
 '''
 
 
@@ -32,7 +41,7 @@ def main(argv=None):
         argv = sys.argv
     try:
         try:
-            opts, args = getopt.getopt(argv[1:], "ho:v", ["help", "output="])
+            opts, args = getopt.getopt(argv[1:], "hm:t:v", ["help", "manifest=", "template="])
         except getopt.error, msg:
             raise Usage(msg)
         
@@ -40,7 +49,8 @@ def main(argv=None):
             raise Usage(help_message)
             
         verbose = False
-        output = None
+        manifest = None
+        template = None
             
         # option processing
         for option, value in opts:
@@ -48,8 +58,10 @@ def main(argv=None):
                 verbose = True
             if option in ("-h", "--help"):
                 raise Usage(help_message)
-            if option in ("-o", "--output"):
-                output = value
+            if option in ("-m", "--manifest"):
+                manifest = value
+            if option in ("-t", "--template"):
+                template = value
         
         universe_filename = args[0]
         reader = None
@@ -57,13 +69,13 @@ def main(argv=None):
             with open(universe_filename, 'rb') as universe_file:
                 reader = Reader(universe_file)
                 
-            if output is None:
+            if manifest is None:
                 manifest_filename = universe_filename+'.txt'
             else:
-                manifest_filename = output
+                manifest_filename = manifest
                 
             with open(manifest_filename, 'w') as manifest_file:
-                Manifest(reader.universe).save(manifest_file)
+                Manifest(reader.universe, template).save(manifest_file)
         except IOError as error:
             print >> sys.stderr, "Unable to open %s: %s (error %d)" % (
                 error.filename, error.strerror, error.errno)
@@ -74,7 +86,7 @@ def main(argv=None):
 
     except Usage, err:
         print >> sys.stderr, sys.argv[0].split("/")[-1] + ": " + str(err.msg)
-        print >> sys.stderr, "\t for help use --help"
+        # print >> sys.stderr, "\t for help use --help"
         return 2
 
 
