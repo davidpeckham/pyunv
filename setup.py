@@ -57,7 +57,7 @@ setup(
     author_email = 'dave.peckham@me.com',
     classifiers = filter(None, CLASSIFIERS.split("\n")),
     description = 'Parse SAP BusinessObjects universe (*.unv) files',
-    data_files = [('', glob.glob('*.mako'))]
+    data_files = [('', glob.glob('*.mako'))],
     download_url = 'http://code.google.com/p/pyunv/downloads/list',
     include_package_data = True,
     install_requires = ['Mako'],
