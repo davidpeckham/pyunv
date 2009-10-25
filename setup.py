@@ -4,9 +4,9 @@
 ##
 
 """This package reads a SAP BusinessObjects universe (.unv) file
-and creates a text manifest that includes universe settings, 
-classes, objects, conditions, source tables, source columns, and 
-joins. You can use your favorite diff tool to compare manifests 
+and creates a text manifest that includes universe settings,
+classes, objects, conditions, source tables, source columns, and
+joins. You can use your favorite diff tool to compare manifests
 and track changes between versions of your universes.
 """
 
@@ -36,13 +36,23 @@ Programming Language :: Python
 Topic :: Software Development :: Libraries :: Python Modules
 """
 
+OPTIONS = {
+    "py2exe": {
+        "compressed": 1,
+        "optimize": 2,
+        "bundle_files": 1,
+        "packages": ["pyunv", "mako.cache"],
+        "excludes": ["Tkinter"]
+        # "dll_excludes": ["MSVCP90.dll",]
+        }
+}
+
 setup(
     name = 'pyunv',
     version = __version__,
     author = 'David Peckham',
     author_email = 'dave.peckham@me.com',
     classifiers = filter(None, CLASSIFIERS.split("\n")),
-    console = ['docunv.py'],
     description = 'Parse SAP BusinessObjects universe (*.unv) files',
     download_url = 'http://code.google.com/p/pyunv/downloads/list',
     include_package_data = True,
@@ -56,5 +66,10 @@ setup(
     test_suite = 'tests',
     url = 'http://code.google.com/p/pyunv/',
     zip_safe = False,
+    
+    # py2exe
+    console = ['docunv.py'],
     zipfile = None, # bundle the standard library into the py2exe executable
+
+    OPTIONS,
     )
