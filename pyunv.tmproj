@@ -48,13 +48,13 @@
 			<key>filename</key>
 			<string>docunv.py</string>
 			<key>lastUsed</key>
-			<date>2009-10-24T23:46:38Z</date>
+			<date>2009-10-25T00:59:53Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>setup.py</string>
 			<key>lastUsed</key>
-			<date>2009-10-24T23:46:41Z</date>
+			<date>2009-10-25T08:37:00Z</date>
 			<key>selected</key>
 			<true/>
 		</dict>
@@ -78,9 +78,9 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>23</integer>
 				<key>line</key>
-				<integer>72</integer>
+				<integer>66</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -95,6 +95,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{101, 4}, {887, 774}}</string>
+	<string>{{90, 65}, {887, 878}}</string>
 </dict>
 </plist>

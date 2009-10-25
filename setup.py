@@ -15,7 +15,10 @@ and track changes between versions of your universes.
 
 from pyunv import __version__
 
-import sys, os, string
+import glob
+import os
+import string
+import sys
 from setuptools import setup, find_packages
 from distutils.errors import *
 
@@ -54,6 +57,7 @@ setup(
     author_email = 'dave.peckham@me.com',
     classifiers = filter(None, CLASSIFIERS.split("\n")),
     description = 'Parse SAP BusinessObjects universe (*.unv) files',
+    data_files = [('', glob.glob('*.mako'))]
     download_url = 'http://code.google.com/p/pyunv/downloads/list',
     include_package_data = True,
     install_requires = ['Mako'],

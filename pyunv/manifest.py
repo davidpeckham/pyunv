@@ -21,7 +21,7 @@ class Manifest:
 
     def save(self, f):
         """docstring for write_manifest"""
-        template = Template(filename='pyunv/templates/manifest.mako', 
+        template = Template(filename='manifest.mako', 
             output_encoding='utf-8', encoding_errors='replace')
         f.write(template.render(universe=self.universe))
 
