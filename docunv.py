@@ -10,25 +10,33 @@ Copyright (c) 2009 David Peckham. All rights reserved.
 import sys
 import getopt
 
+import pyunv
 from pyunv.universe import Universe
 from pyunv.reader import Reader
 from pyunv.manifest import Manifest
 
+__version__ = "0.1.0"
+
 help_message = '''
 Create a text manifest for your BusinessObjects XI R2 universe.
+Copyright (c) 2009 David Peckham. All rights reserved
 
 pyunv options universe.unv
 
-where options are:
+    where options are:
 
--m  --manifest   manifest output file 
--t  --template   manifest template
--h  --help       show this help
+    -m  --manifest   manifest output file 
+    -t  --template   manifest template
+    -h  --help       show this help
 
 Examples:
   docunv universe.unv
-  docunv universe.unv --template manifest.mako --manifest universe.manifest
+  docunv --manifest manifest.txt universe.unv 
+  docunv --manifest manifest.txt --template manifest.mako universe.unv 
 '''
+
+def version():
+    return ' %s (pyunv %s)' % (__version__, pyunv.__version__)
 
 
 class Usage(Exception):
@@ -85,7 +93,7 @@ def main(argv=None):
             raise
 
     except Usage, err:
-        print >> sys.stderr, sys.argv[0].split("/")[-1] + ": " + str(err.msg)
+        print >> sys.stderr, sys.argv[0].split("/")[-1] + version() +": " + str(err.msg)
         # print >> sys.stderr, "\t for help use --help"
         return 2
 

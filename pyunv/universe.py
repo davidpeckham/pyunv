@@ -12,12 +12,14 @@ import re
 import sys
 import collections
 from repr import repr
+from pyunv import __version__
 
 
 class Universe(object):
 
     def __init__(self, id_=None, name=None, description=None):
         super(Universe, self).__init__()
+        self.pyunv_version = __version__
         self.id_ = id_
         self.name = name
         self.description = description
