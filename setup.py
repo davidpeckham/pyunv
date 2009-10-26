@@ -44,8 +44,6 @@ LONG_DESCRIPTION = description + '\n\n' + changes
 
 OPTIONS = {
     "py2exe": {
-        "console": ['docunv.py'],
-        "zipfile": None,
         "compressed": 1,
         "optimize": 2,
         "bundle_files": 1,
@@ -76,4 +74,6 @@ setup(
     url = 'http://code.google.com/p/pyunv/',
     zip_safe = False,
     options = OPTIONS,
+    console = ['docunv.py'],
+    zipfile = None,
     )
