@@ -1,0 +1,32 @@
+Docunv.exe is a tool I wrote to help track changes between versions of my BusinessObjects XI R2 universes. It creates a plain-text manifest for a BusinessObjects universe. The docunv manifest looks similar to the PDF that you can create with Designer. Unlike the PDF produced by Designer, this manifest includes the expression logic behind your objects, joins, contexts, and conditions. You can  use your favorite file comparison tool to compare manifests from different versions of your universe to see what changed.
+
+The manifest includes:
+[list][*]name, description, domain, revision, authors, comments
+[*]connection
+[*]strategies
+[*]controls
+[*]SQL parameters
+[*]classes
+[*]objects
+[*]tables
+[*]columns
+[*]aliases
+[*]joins
+[*]contexts
+[*]conditions[/list]
+See the attached sample manifest that I generated from a very simple universe. Docunv doesn't support hierarchies, universe links, object formats and some other universe features. If you need these, please let me know.
+
+[b]Installing[/b]
+This tool is free to download and use. You can download it from [url=http://web.me.com/dave.peckham/downloads/docunv.zip]http://web.me.com/dave.peckham/downloads/docunv.zip[/url].  Unzip this archive to any folder. When you're done, you should have two files -- docunv.exe and manifest.mako. Make sure these files are in the same folder.
+
+[b]Using[/b]
+To create a manifest for your universe, open a command prompt and invoke docunv like this:
+
+C:\install_folder> docunv your_universe.unv
+
+Where install_folder is the folder that you extracted docunv to, and your_universe.unv is the full path and file name of your BusinessObjects XI R2 universe. I recommend that you make a copy of your universe and run docunv on the copy until you're comfortable with this tool. You can customize the layout and content of your manifests -- just edit the manifest template (manifest.mako). Docunv uses the open source Mako template library. See the [url=http://www.makotemplates.org/]Mako documentation[/url] for template syntax.
+
+[b]Problems?[/b]
+I tested docunv with several large universes, but that doesn't mean it will work with every universe. If you run into any problems with your XI R2 universe, please let me know. I haven't tested docunv with XI R3 universes, so if you try, please let me know how it goes. This tool requires certain Microsoft Visual C++ runtime libraries that some Windows computers may not have. If docunv fails with a cryptic message about missing libraries, try downloading them from http://www.microsoft.com/downloads/details.aspx?FamilyID=9b2da534-3e03-4391-8a4d-074b9f2bc1bf
+
+David

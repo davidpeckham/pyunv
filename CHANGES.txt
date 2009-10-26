@@ -1,4 +1,13 @@
+Changes
+=======
+
+0.2.4  October 26, 2009
+-----------------------
+- Changes are now shown in the PyPi description
+- docunv.py now prevents you from accidentally overwriting universe files
+
 0.2.3  October 25, 2009
+-----------------------
 - Added docunv, a console program that creates universe manifests
 - Added support for py2exe (use "python setup.py py2exe" to create a Windows console version of docunv)
 - Manifest constructor now accepts a custom Mako template
@@ -7,10 +16,12 @@
 - Renamed Parameters.row_limit to query_row_limit
 
 0.2.2  September 28, 2009
+-------------------------
 - Manifest constructor now takes the universe an argument
 - PyUnv source now conforms to PEP8 (thanks pep8!)
 
 0.2.1  September 27, 2009
+-------------------------
 - Universe now shows object name (instead of index) in where clauses
 - Reader now parses contexts
 - Reader now handles universe files with "false" section markers
@@ -25,35 +36,40 @@
   table, column, or object, Designer does not cleanup any references to the entity.
 
 0.2.0  September 24, 2009
+-------------------------
 - Now parses universe joins
 - Now sorts source database columns by id
 - Added a few unittests and XI R2 test universes (more on the way)
 
 0.1.9  September 23, 2009
+-------------------------
 - Added sample universes for unit tests
 - Fixed a bug that caused manifests to show a condition's parent id instead of name.
-- The manifest template now creates a manifest that resembles the PDF file 
-created by Designer.
+- The manifest template now creates a manifest that resembles the PDF file created by Designer.
 - setup.py now uses Setuptools instead of distutils
 - This works now -- "python setup.py test"
 
 0.1.8  September 18, 2009
+-------------------------
 - Restructured project folder to prepare for unit tests.
 - Moved Subversion repository to Google Code.
 - Borrowed setup.py settings from Python project.
 
-0.1.7
+0.1.7  September, 2009
+----------------------
 - Fixes a bug with reading a source table that has certain metadata. This
   is a temporary workaround until I can decode this metadata.
 - Now reads source columns from the universe file.
 
-0.1.6
+0.1.6  September 2009
+---------------------
 - Added the Manifest class to generate a text manifest for a BusinessObjects 
   universe. Manifest uses the Mako template engine.
 - Reader.read_short_string now strips carriage returns and line feeds from
   universe strings. It returns a unicode string instead of a string tuple.
 
-0.1.5
+0.1.5  September 2009
+---------------------
 - First PyPi release
 - Reads basic universe parameters, classes, objects, conditions, tables, and
   virtual tables.

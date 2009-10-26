@@ -68,6 +68,8 @@ def main(argv=None):
                 raise Usage(help_message)
             if option in ("-m", "--manifest"):
                 manifest = value
+                if manifest.endswith('.unv'):
+                    raise Usage(help_message)
             if option in ("-t", "--template"):
                 template = value
         
