@@ -1,0 +1,5 @@
+PyUnv reads SAP BusinessObjects universe (.unv) files. BusinessObjects universes provide a metadata layer above enterprise databases, expressed as data classes and objects that are easier for business users to understand than the underlying data structures. Universes are edited with the BusinessObjects Designer and saved to universe files in an undocumented binary format. PyUnv can extract most of this metadata from universe files, enabling you to use it outside BusinessObjects, or to create tools to streamline your BusinessObjects development process.
+
+PyUnv requires Mako to produce universe manifests. I include a sample template for a text manifest. If you come up with your own manifests in RST, HTML, or other, let me know.
+
+I've tested this version on universes created with BusinessObjects XI [R2](https://code.google.com/p/pyunv/source/detail?r=2). When support for [R2](https://code.google.com/p/pyunv/source/detail?r=2) stabilizes, I intend to add support for other versions.
